@@ -1,0 +1,88 @@
+html {
+    background: url(images/highfive2.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 100%;
+}
+body {
+    background-color: transparent;
+    height: 100%;
+    overflow: scroll;
+}
+
+.table-striped>tbody>tr:nth-child(odd) {
+    background-color: #485563;
+}
+.table-hover>tbody>tr:hover {
+    background-color: #7B8A9B !important;
+}
+.foreground-content {
+    background-color: #3F4C59;
+}
+.text-welcome-info {
+    padding-bottom: 60px;
+}
+.text-smaller {
+    font-size: 15px !important;
+}
+.btn-default:hover {
+    background-color: #29313A;
+}
+
+.modal-dialog {
+    margin-top: 50px;
+}
+
+
+.content {
+    max-width: 580px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin: auto;
+    background: rgba(255,255,255,0.4);
+    background: #FFF \9;
+    overflow: hidden;
+    z-index: 3;
+    position: relative;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+}
+span.angletop {
+    border: 10px solid transparent;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin: auto;
+    border-top-width: 15px;
+    border-bottom: 10px solid rgba(255,255,255,0.4) !important;
+    border-bottom: 10px solid #FFF !important \9;
+    z-index: 2;
+    max-width: 580px;
+    display: block;
+    position: relative;
+}
+span.logoangletop {
+    border: 50px solid transparent;
+    border-bottom: 35px solid rgba(255, 255, 255, 0.4) !important;
+    border-bottom: 35px solid #FFF !important \9;
+    z-index: 3;
+    width: 0px;
+    margin: 280px auto -28px;
+    display: block;
+    position: relative;
+}
+.logo {
+    margin: 22px auto -120px;
+    /*margin-bottom: -120px;*/
+    /*margin-right: 22px;*/
+    /*margin-left: 22px;*/
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+.center-content {
+    margin: auto 20px auto;
+}
+img {
+    max-width: 100%;
+}
