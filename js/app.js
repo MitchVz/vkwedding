@@ -1,9 +1,5 @@
 if (Meteor.isClient) {
 
-  $(document).ready(function(){
-    $(".hisrc img").hisrc();
-  });
-
   var bgCounter = 0;
   //var backgrounds = [
   //      "/images/surveying-kingdom.jpg",

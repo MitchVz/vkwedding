@@ -1,3 +1,28 @@
+/* Desktops and laptops ----------- */
+/*@media only screen*/
+/*and (min-width : 801px) {*/
+    /*body {*/
+        /*background: url(images/highfive2.jpg) no-repeat center 20% fixed;*/
+        /*-webkit-background-size: cover;*/
+        /*-moz-background-size: cover;*/
+        /*-o-background-size: cover;*/
+        /*background-size: cover;*/
+        /*min-height: 100%;*/
+    /*}*/
+/*}*/
+/* Small browser windows ----------- */
+/*@media only screen*/
+/*and (max-width : 800px) {*/
+    /*body {*/
+        /*background: url(images/highfive_sm_lowres.jpg) no-repeat center center fixed;*/
+        /*-webkit-background-size: cover;*/
+        /*-moz-background-size: cover;*/
+        /*-o-background-size: cover;*/
+        /*background-size: cover;*/
+        /*min-height: 100%;*/
+    /*}*/
+/*}*/
+
 #bg {
     position: fixed;
     top: 30px;
@@ -10,7 +35,9 @@
     width: 100vw;
     height: 100vh;
     object-fit: cover;
+    object-position: center 20%;
 }
+
 .modal-dialog {
     margin-top: 50px;
 }
