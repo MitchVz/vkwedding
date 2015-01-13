@@ -1,28 +1,3 @@
-/* Desktops and laptops ----------- */
-/*@media only screen*/
-/*and (min-width : 801px) {*/
-    /*body {*/
-        /*background: url(images/highfive2.jpg) no-repeat center 20% fixed;*/
-        /*-webkit-background-size: cover;*/
-        /*-moz-background-size: cover;*/
-        /*-o-background-size: cover;*/
-        /*background-size: cover;*/
-        /*min-height: 100%;*/
-    /*}*/
-/*}*/
-/* Small browser windows ----------- */
-/*@media only screen*/
-/*and (max-width : 800px) {*/
-    /*body {*/
-        /*background: url(images/highfive_sm_lowres.jpg) no-repeat center center fixed;*/
-        /*-webkit-background-size: cover;*/
-        /*-moz-background-size: cover;*/
-        /*-o-background-size: cover;*/
-        /*background-size: cover;*/
-        /*min-height: 100%;*/
-    /*}*/
-/*}*/
-
 #bg {
     position: fixed;
     top: 30px;
@@ -93,3 +68,66 @@ span.logoangletop {
 img {
     max-width: 100%;
 }
+
+/* Clock stuff */
+@media all
+and (min-width: 621px) {
+    div .clock {
+        margin-right: auto;
+        margin-left: auto;
+        width: 92%;
+    }
+}
+@media all
+and (min-width: 519px)
+and (max-width: 620px) {
+    div .clock {
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+    }
+    .my-clock{
+    zoom: 0.8;
+    -moz-transform: scale(0.8)
+    }
+}
+@media all
+and (min-width: 400px)
+and (max-width: 518px) {
+    div .clock {
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+    }
+    .my-clock{
+        zoom: 0.6;
+        -moz-transform: scale(0.6)
+    }
+}
+@media all
+and (max-width: 399px) {
+    div .clock {
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+    }
+    .my-clock{
+        zoom: 0.4;
+        -moz-transform: scale(0.4)
+    }
+}
+
+.flip-clock-wrapper .flip {
+    /*box-shadow: none;*/
+}
+.flip-clock-dot {
+    box-shadow: none;
+    background: #4E5D6C;
+}
+.flip-clock-wrapper ul li a div div.inn {
+    color: #F7F9FA;
+    background-color: #4E5D6C;
+
+}
+
+

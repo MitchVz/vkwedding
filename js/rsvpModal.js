@@ -1,7 +1,4 @@
 if (Meteor.isClient) {
-
-
-
     Template.rsvpModal.events({
         'click #search': function () {
             $("[name='page-1']").hide();
@@ -21,9 +18,9 @@ if (Meteor.isClient) {
 
             if (input.prop('checked')) {
                 if (!$(event.target).parent().hasClass("even")) {
-                    $(event.target).parent().css("background-color", "#4e5d6c");
+                    $(event.target).parent().css("background-color", "#ffffff");
                 } else {
-                    $(event.target).parent().css("background-color", "#485563");
+                    $(event.target).parent().css("background-color", "#f9f9f9");
                 }
                 input.prop('checked', false);
             } else {
