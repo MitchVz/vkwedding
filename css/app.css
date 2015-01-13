@@ -105,7 +105,21 @@ and (max-width: 518px) {
     }
 }
 @media all
+and (min-width: 350px)
 and (max-width: 399px) {
+    div .clock {
+        margin-right: auto;
+        margin-left: auto;
+        width: 90%;
+    }
+    .my-clock{
+        zoom: 0.5;
+        -moz-transform: scale(0.5)
+    }
+}
+@media all
+and (min-width: 200px)
+and (max-width: 349px) {
     div .clock {
         margin-right: auto;
         margin-left: auto;
