@@ -12,8 +12,8 @@
                 <div class="modal-body">
                     <form class="">
                         <div name="page-1" class="form-group">
-                            <label for="firstName">Search for guests by name:</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="Enter Last Name">
+                            <label for="search">Search for guests by name:</label>
+                            <input type="text" class="form-control" id="searchField" placeholder="Enter Guest Name">
                         </div>
 
                         <div name="page-2" class="form-group" hidden>
@@ -29,30 +29,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <!--<tr>-->
+                                        <!--<td><input type="checkbox"></td>-->
+                                        <!--<td>Catherine Kramer</td>-->
+                                        <!--<td><span class="glyphicon glyphicon-ok"></span></td>-->
+                                        <!--<td><span class="glyphicon glyphicon-ok"></span></td>-->
+                                    <!--</tr>-->
+                                    {{#each guest}}
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>Catherine Kramer</td>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>John Kramer</td>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
-                                        <td><span class="glyphicon glyphicon-remove"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Mitch Vanderzee</td>
-                                        <td><span class="glyphicon glyphicon-ok"></span></td>
-                                        <td><span class="glyphicon glyphicon-remove"></span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>Rachel Kramer</td>
+                                        <td>{{Name}}</td>
                                         <td></td>
                                         <td></td>
                                     </tr>
+                                    {{/each}}
                                 </tbody>
                             </table>
                         </div>

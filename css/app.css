@@ -68,8 +68,27 @@ span.logoangletop {
 img {
     max-width: 100%;
 }
+.modal {
+    overflow-y: hidden;
+}
+.modal .modal-body {
+    max-height: 420px;
+    overflow-y: auto;
+}
+.highlight-row {
+    background-color: #00b3ee !important;
+    color: white;
+}
+.highlight-row:hover {
+    background-color: #016d92 !important;
+}
+.table-hover>tbody>tr:hover {
+    background-color: #E7E7E7;
+}
 
-/* Clock stuff */
+
+
+/* Countdown timer stuff */
 @media all
 and (min-width: 621px) {
     div .clock {
@@ -130,7 +149,6 @@ and (max-width: 349px) {
         -moz-transform: scale(0.4)
     }
 }
-
 .flip-clock-wrapper .flip {
     /*box-shadow: none;*/
 }
