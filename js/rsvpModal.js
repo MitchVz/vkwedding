@@ -1,14 +1,38 @@
 if (Meteor.isClient) {
 
+    SelectedGuests = new Meteor.Collection( null ); // Making a local meteor collection
+
     Template.rsvpModal.helpers({
         'guest': function() {
+
             var searchQuery = Session.get('query');
             if (searchQuery == "") {
                 return null;
             } else {
                 return Guests.find(
-                    {Name: new RegExp(searchQuery, 'i')} //'i' specifies case-insensitve
+                    {Name: new RegExp(searchQuery, 'i')}, //'i' specifies case-insensitve
+                    {sort: { Name: 1 } }
                 );
+            }
+        },
+        'selectedGuest': function() {
+            return SelectedGuests.find();
+        },
+        'noGuestSelected': function() {
+            return SelectedGuests.find().count() == 0;
+        },
+        'IAmOrWeAre': function() {
+            if (SelectedGuests.find().count() > 1) {
+                return "we're";
+            } else {
+                return "I'm";
+            }
+        },
+        'IOrWe': function() {
+            if (SelectedGuests.find().count() > 1) {
+                return "we";
+            } else {
+                return "I";
             }
         }
 
@@ -31,24 +55,34 @@ if (Meteor.isClient) {
                 });
                 $(window).keydown(function(event){
                     if(event.keyCode == 8) {
-                        $('#back').click();
+                        $('#back1').click();
                     }
                 });
             });
 
             $("[name='page-1']").hide();
             $("[name='page-2']").show();
+            $("[name='page-3']").hide();
         },
-        'click #back': function () {
-            $("[name='page-2']").hide();
+        'click #back1': function () {
             $("[name='page-1']").show();
+            $("[name='page-2']").hide();
+            $("[name='page-3']").hide();
 
             // unchecking all checkboxes
+            SelectedGuests.remove({});
             $('input:checkbox').each( function () {
                 $(this).removeAttr('checked');
                 $(this).parent().parent().removeClass("highlight-row");
             });
 
+            // refocus the text field
+            $('#searchField').focus();
+        },
+        'click #back2': function () {
+            $("[name='page-1']").hide();
+            $("[name='page-2']").show();
+            $("[name='page-3']").hide();
         },
         'click tbody > tr': function ( event ) {
 
@@ -57,8 +91,10 @@ if (Meteor.isClient) {
 
                 if ($(event.target).prop('checked')) {
                     $(event.target).parent().parent().addClass("highlight-row");
+                    SelectedGuests.insert(this);
                 } else {
                     $(event.target).parent().parent().removeClass("highlight-row");
+                    SelectedGuests.remove(this);
                 }
 
             } else {
@@ -66,15 +102,21 @@ if (Meteor.isClient) {
                 var input = $(event.target).parent().children(":first-child").children(":first-child");
 
                 if (input.prop('checked')) {
-                    $(event.target).parent().removeClass("highlight-row");
                     input.prop('checked', false);
+                    $(event.target).parent().removeClass("highlight-row");
+                    SelectedGuests.remove(this);
                 } else {
                     input.prop('checked', true);
                     $(event.target).parent().addClass("highlight-row");
+                    SelectedGuests.insert(this);
                 }
             }
+        },
+        'click #rsvp': function () {
 
-
+            $("[name='page-1']").hide();
+            $("[name='page-2']").hide();
+            $("[name='page-3']").show();
         }
     });
 

@@ -13,8 +13,11 @@ if (Meteor.isClient) {
             });
 
             // Moving to page one and unchecking all checkboxes
+            $("[name='page-3']").hide();
             $("[name='page-2']").hide();
             $("[name='page-1']").show();
+
+            SelectedGuests.remove({});
             $('input:checkbox').each( function () {
                 $(this).removeAttr('checked');
                 $(this).parent().parent().removeClass("highlight-row");

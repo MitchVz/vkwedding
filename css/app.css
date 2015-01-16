@@ -85,7 +85,9 @@ img {
 .table-hover>tbody>tr:hover {
     background-color: #E7E7E7;
 }
-
+.song-input {
+    margin-top: 10px;
+}
 
 
 /* Countdown timer stuff */

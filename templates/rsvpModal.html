@@ -1,21 +1,25 @@
 <template name="rsvpModal">
 
     <div class="modal fade" id="rsvpModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog ">
             <div class="modal-content">
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">RSVP -- For yourself or a group</h4>
+                    <h4 class="modal-title" name="page-1">RSVP, for yourself or a group</h4>
+                    <h4 class="modal-title" name="page-2">RSVP, for yourself or a group</h4>
+                    <h3 class="modal-title" name="page-3">Registering for:</h3>
                 </div>
 
                 <div class="modal-body">
                     <form class="">
+                        <!--Page 1-->
                         <div name="page-1" class="form-group">
                             <label for="search">Search for guests by name:</label>
-                            <input type="text" class="form-control" id="searchField" placeholder="Enter Guest Name">
+                            <input type="text" class="form-control" id="searchField" placeholder="Enter Guest Name" autofocus>
                         </div>
 
+                        <!--Page 2-->
                         <div name="page-2" class="form-group" hidden>
                             <h1>Guests</h1>
                             <p>Select one or more guests to add or edit RSVPs</p>
@@ -38,13 +42,47 @@
                                     {{#each guest}}
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td>{{Name}}</td>
+                                        <td class="guest" data-id={{_id.toHexString}}>{{Name}}</td>
                                         <td></td>
                                         <td></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
                             </table>
+                        </div>
+
+                        <!--Page 3-->
+                        <div name="page-3" class="form-group" hidden>
+                            {{#each selectedGuest}}
+                                <li><h4 style=" text-indent: 1em;" class="text-info">{{Name}}</h4></li>
+                            {{/each}}
+
+                            <div class="well clearfix">
+                                <label class="control-label"><strong>Are you coming?</strong></label>
+                                <div class="">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="attendRadios" id="rsvpConfirm" value="true">
+                                            It's the party of the century! Of course {{IOrWe}}'ll be there!
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="attendRadios" id="rsvpDecline" value="false">
+                                            Nope, {{IAmOrWeAre}} busy doing something way less cool
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div name="correctSelection">
+                                    <label class="control-label"><strong>Excellent choice!</strong></label>
+                                    <br>
+                                    <label class="control-label"><strong>Feel free to nominate some songs for our playlist:</strong></label>
+                                    <input id="song1" type="text" class="form-control song-input" placeholder="Faithfully - Journey">
+                                    <input id="song2" type="text" class="form-control song-input" placeholder="For the benefit of Mr. Kite - The Beatles">
+                                    <input id="song3" type="text" class="form-control song-input" placeholder="Evergreen - Barbara Streisand">
+                                </div>
+                            </div>
                         </div>
 
 
@@ -56,8 +94,16 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <!--page 1-->
                     <button id="search" name="page-1" type="button" class="btn btn-info">Search</button>
-                    <button id="back" name="page-2" type="button" class="btn btn-primary" style="display:none">Back</button>
+
+                    <!--page 2-->
+                    <button id="back1" name="page-2" type="button" class="btn btn-primary" style="display:none">Back</button>
+                    <button id="rsvp" name="page-2" type="button" class="btn btn-info" style="display:none" disabled="{{noGuestSelected}}">RSVP</button>
+
+                    <!--page 3-->
+                    <button id="back2" name="page-3" type="button" class="btn btn-primary" style="display:none">Back</button>
+                    <button id="confirm" name="page-3" type="button" class="btn btn-info" style="display:none" disabled>Submit</button>
                 </div>
 
             </div>
