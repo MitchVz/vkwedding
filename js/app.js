@@ -2,6 +2,13 @@ Guests = new Mongo.Collection('guests');
 
 if (Meteor.isClient) {
 
+    // Resize the clock whenever the window gets resized
+    $(window).resize( function () {
+        var width = $(window).width();
+        resizeClock(width);
+    });
+
+
     $(document).ready(function () {
         // Stopping the enter key from doing anything (unless I tell it to, of course)
         $(window).keydown(function (event) {
@@ -47,7 +54,48 @@ if (Meteor.isClient) {
 
         $('.flip-clock-divider.minutes').children(":first-child").html("<img src='/images/minutes_text.png'>");
 
+
+        // Resizing the clock on load
+        var width = $(window).width();
+        resizeClock(width);
     });
+
+    resizeClock = function (width) {
+        if (width < 622) {
+            // I got the zoom property by doing a linear regression with a bunch of points
+            var zoom = (.00193 * width) - .204;
+            $('.my-clock').css({
+                "-webkit-transform-origin-x": 0,
+                "-webkit-transform-origin-y": 0,
+                "-webkit-transform": "scale(" + zoom + ")",
+                "-moz-transform-origin": "0 0",
+                "-moz-transform": "scale(" + zoom + ")",
+                "-ms-transform-origin": "0 0",
+                "-ms-transform": "scale(" + zoom + ")",
+                "width": "250%"
+            });
+
+            // Linear regressions again
+            var height = (.27 * width) - 9.64;
+            var padding = (.0677 * width) - 23.89;
+            $('.clock-content').css({
+                "height": height,
+                "padding-top": padding
+            });
+        } else {
+
+            $('.my-clock').css({
+                "-webkit-transform": "",
+                "-moz-transform": "",
+                "-ms-transform": "",
+                "width": "100%"
+            });
+            $('.clock-content').css({
+                "height": "",
+                "padding-top": ""
+            });
+        }
+    };
 
     clickEnterButtonFromPage = function (currentPage) {
         switch (currentPage) {
@@ -66,7 +114,7 @@ if (Meteor.isClient) {
             default:
                 break;
         }
-    }
+    };
 
 
 
