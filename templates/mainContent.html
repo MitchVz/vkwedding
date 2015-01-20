@@ -1,0 +1,53 @@
+<template name="mainContent">
+    <span class="logoangletop"></span>
+
+    <div class="center-content">
+        <div class="logo">
+            <img src="images/logo2.png" alt="home">
+        </div>
+        <span class="angletop"></span>
+
+        <div class="content">
+
+            <div class="block" style="text-align: center">
+                <img style="padding-top: 105px" src="/images/names.png" alt="">
+                <br>
+                <br>
+                <hr class="dots">
+                    <img src="/images/ceremony_begins.png" alt="">
+                <hr class="dots">
+                <br>
+            </div>
+        </div>
+
+        <div id="clock-div" class="center-clock">
+            <div class="clock-content">
+                <div class="block">
+                    <div class="clock my-clock" style="margin-top: 30px;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-content content">
+            <h1>
+                <div style="text-align: center;">
+                    <img src="/images/banner2.png" alt="">
+                </div>
+            </h1>
+        </div>
+
+        <span class="anglebottom"></span>
+    </div>
+
+    <script type="text/javascript">
+        var date = new Date("August 1, 2015 13:01:00"); // GMT for some reason. This is 12pm EST
+        var now = new Date();
+        var diff = (date.getTime()/1000) - (now.getTime()/1000);
+
+        var clock = $('.clock').FlipClock(diff,{
+            clockFace: 'DailyCounter',
+            countdown: true,
+            showSeconds: false
+        });
+    </script>
+</template>

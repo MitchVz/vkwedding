@@ -23,20 +23,33 @@
     /*margin-left: 20px;*/
     /*margin-right: 20px;*/
     margin: auto;
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.7);
     background: #FFF \9;
     overflow: hidden;
     z-index: 3;
     position: relative;
-    box-shadow: 0px 3px 5px rgba(0,0,0,0.5);
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.7);
+}
+.clock-content {
+    max-width: 540px;
+    margin: auto;
+
+    padding-top: 20px;
+    background: rgba(55,55,57,1);
+    background: #373739 \9;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.7);
+}
+.center-clock {
+    margin: auto 20px auto;
 }
 span.angletop {
     border: 10px solid transparent;
-    /*margin-left: 20px;*/
-    /*margin-right: 20px;*/
     margin: auto;
     border-top-width: 15px;
-    border-bottom: 10px solid rgba(255,255,255,0.6) !important;
+    border-bottom: 10px solid rgba(255,255,255,0.7) !important;
     border-bottom: 10px solid #FFF !important \9;
     z-index: 2;
     max-width: 580px;
@@ -45,13 +58,30 @@ span.angletop {
 }
 span.logoangletop {
     border: 50px solid transparent;
-    border-bottom: 35px solid rgba(255, 255, 255, 0.6) !important;
+    border-bottom: 35px solid rgba(255, 255, 255, 0.7) !important;
     border-bottom: 35px solid #FFF !important \9;
     z-index: 3;
     width: 0px;
-    margin: 280px auto -28px;
+    margin: 330px auto -28px;
     display: block;
     position: relative;
+}
+span.anglebottom {
+    border: 10px solid transparent;
+    border-top: 10px solid rgba(255, 255, 255, 0.7) !important;
+    border-top: 10px solid #FFF !important \9;
+    z-index: 4;
+    max-width: 580px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+hr.dots {
+    background: none;
+    border: 0;
+    border-top: 8px dotted #3d4958;
+    margin: 13px 23px 20px 23px;
+    clear: both;
 }
 .logo {
     margin: 22px auto -120px;
@@ -90,13 +120,14 @@ img {
 }
 
 
+
 /* Countdown timer stuff */
 @media all
 and (min-width: 621px) {
     div .clock {
         margin-right: auto;
         margin-left: auto;
-        width: 92%;
+        width: 99%;
     }
 }
 @media all
@@ -162,6 +193,26 @@ and (max-width: 349px) {
     color: #F7F9FA;
     background-color: #4E5D6C;
 
+}
+/*.flip-clock-divider .flip-clock-label {*/
+    /*font-size: 22px;*/
+    /*font-family: monospace;*/
+    /*color: white;*/
+/*}*/
+.flip-clock-divider.days .flip-clock-label {
+    font-size: 25px;
+    right: -96px;
+    left: 13px;
+}
+.flip-clock-divider.hours .flip-clock-label {
+    font-size: 25px;
+    right: -108px;
+    left: 25px;
+}
+.flip-clock-divider.minutes .flip-clock-label {
+    font-size: 25px;
+    right: -139px;
+    left: 24px;
 }
 
 

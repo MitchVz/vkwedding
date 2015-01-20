@@ -8,7 +8,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" name="page-1">RSVP, for yourself or a group</h4>
                     <h4 class="modal-title" name="page-2">RSVP, for yourself or a group</h4>
-                    <h3 class="modal-title" name="page-3">Registering for:</h3>
+                    <h3 class="modal-title" name="page-3">Add your RSVP for:</h3>
+                    <h3 class="modal-title text-success" name="page-4"><strong>Success!</strong></h3>
                 </div>
 
                 <div class="modal-body">
@@ -21,6 +22,7 @@
 
                         <!--Page 2-->
                         <div name="page-2" class="form-group" hidden>
+                            {{#if atLeastOneGuest}}
                             <h1>Guests</h1>
                             <p>Select one or more guests to add or edit RSVPs</p>
                             <table id="guestSelectorTable" class="table table-striped table-hover">
@@ -33,22 +35,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!--<tr>-->
-                                        <!--<td><input type="checkbox"></td>-->
-                                        <!--<td>Catherine Kramer</td>-->
-                                        <!--<td><span class="glyphicon glyphicon-ok"></span></td>-->
-                                        <!--<td><span class="glyphicon glyphicon-ok"></span></td>-->
-                                    <!--</tr>-->
                                     {{#each guest}}
                                     <tr>
                                         <td><input type="checkbox"></td>
                                         <td class="guest" data-id={{_id.toHexString}}>{{Name}}</td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{{rsvpIcon}}}</td>
+                                        <td>{{{attendingIcon}}}</td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
                             </table>
+                            {{else}}
+                            <p class="text-danger">No guests found</p>
+                            {{/if}}
+
                         </div>
 
                         <!--Page 3-->
@@ -62,48 +62,70 @@
                                 <div class="">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="attendRadios" id="rsvpConfirm" value="true">
+                                            <input type="radio" name="attendRadios" id="rsvpConfirm" value="confirm">
                                             It's the party of the century! Of course {{IOrWe}}'ll be there!
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="attendRadios" id="rsvpDecline" value="false">
+                                            <input type="radio" name="attendRadios" id="rsvpDecline" value="decline">
                                             Nope, {{IAmOrWeAre}} busy doing something way less cool
                                         </label>
                                     </div>
                                 </div>
 
-                                <div name="correctSelection">
-                                    <label class="control-label"><strong>Excellent choice!</strong></label>
+                                <div name="rsvpConfirmMessage" hidden>
+                                    <label class="control-label text-success"><strong>Excellent choice!</strong></label>
                                     <br>
                                     <label class="control-label"><strong>Feel free to nominate some songs for our playlist:</strong></label>
                                     <input id="song1" type="text" class="form-control song-input" placeholder="Faithfully - Journey">
-                                    <input id="song2" type="text" class="form-control song-input" placeholder="For the benefit of Mr. Kite - The Beatles">
+                                    <input id="song2" type="text" class="form-control song-input" placeholder="Ballroom Blitz - Sweet">
                                     <input id="song3" type="text" class="form-control song-input" placeholder="Evergreen - Barbara Streisand">
+                                </div>
+                                <div name="rsvpDeclineMessage" hidden>
+                                    <label class="control-label"><strong>Shoot, we'll miss you!</strong></label>
                                 </div>
                             </div>
                         </div>
 
 
-
-
+                        <!--Page 4-->
+                        <div name="page-4">
+                            <h4>You have successfully RSVP'd for:</h4>
+                            {{#each selectedGuest}}
+                                <li><h3 style=" text-indent: 1em;" class="text-success">{{Name}}</h3></li>
+                            {{/each}}
+                            <br>
+                            <br>
+                            <label class="control-label"><strong>Is there anything else that you want us to know?</strong></label>
+                            <textarea id="commentField" class="form-control" rows="3" placeholder="Add your comments here"></textarea>
+                            <div name="commentConfirmationMessage" hidden>
+                                <label class="control-label text-success"><strong>Thanks for your comment!</strong></label>
+                            </div>
+                        </div>
 
                     </form>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+
                     <!--page 1-->
-                    <button id="search" name="page-1" type="button" class="btn btn-info">Search</button>
+                    <button name="page-1" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button id="search" name="page-1" type="button" class="btn btn-info" disabled>Search</button>
 
                     <!--page 2-->
+                    <button name="page-2" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button id="back1" name="page-2" type="button" class="btn btn-primary" style="display:none">Back</button>
                     <button id="rsvp" name="page-2" type="button" class="btn btn-info" style="display:none" disabled="{{noGuestSelected}}">RSVP</button>
 
                     <!--page 3-->
+                    <button name="page-3" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <button id="back2" name="page-3" type="button" class="btn btn-primary" style="display:none">Back</button>
-                    <button id="confirm" name="page-3" type="button" class="btn btn-info" style="display:none" disabled>Submit</button>
+                    <button id="submit" name="page-3" type="button" class="btn btn-info" style="display:none" disabled>Submit</button>
+
+                    <!--page 4-->
+                    <button name="page-4" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="addComment" name="page-4" type="button" class="btn btn-success" style="display:none" disabled>Send Comment</button>
                 </div>
 
             </div>

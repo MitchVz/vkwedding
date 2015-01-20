@@ -8,41 +8,7 @@
 {{> mainNav}}
 <div id="padding" style="margin-top:60px"></div>
 
-
-
-
-
-
-<span class="logoangletop"></span>
-
-<div class="center-content">
-    <div class="logo">
-        <img src="images/logo2.png" alt="home">
-    </div>
-    <span class="angletop"></span>
-
-    <div class="content">
-
-        <div class="block" style="text-align: center">
-            <img style="padding-top: 105px" src="/images/names.png" alt="">
-            <br>
-            <h1>
-                <div>
-                    <strong style="color: #f5f5f5">August 1, 2015</strong>
-                </div>
-                <div>
-                    12:00 PM
-                </div>
-            </h1>
-        </div>
-
-        <div class="clock my-clock" style="margin-top: 30px;"></div>
-
-
-    </div>
-</div>
-
-
+{{>mainContent}}
 
 
 <!--Background-->
@@ -52,18 +18,9 @@
 </div>
 
 
-<script type="text/javascript">
-    var date = new Date("August 1, 2015 13:01:00"); // GMT for some reason. This is 12pm EST
-    var now = new Date();
-    var diff = (date.getTime()/1000) - (now.getTime()/1000);
-
-    var clock = $('.clock').FlipClock(diff,{
-        clockFace: 'DailyCounter',
-        countdown: true,
-        showSeconds: false
-    });
-</script>
-
 {{> rsvpModal}}
+{{> foodModal}}
+{{> mapModal}}
+{{> registryModal}}
 </body>
 
