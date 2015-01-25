@@ -10,6 +10,9 @@ if (Meteor.isClient) {
 
 
     $(document).ready(function () {
+
+        $('#bg').height($(window).height() + 60);
+
         // Stopping the enter key from doing anything (unless I tell it to, of course)
         $(window).keydown(function (event) {
             if (event.keyCode == 13) {
@@ -80,7 +83,7 @@ if (Meteor.isClient) {
             var padding = (.0677 * width) - 23.89;
             $('.clock-content').css({
                 "height": height,
-                "padding-top": padding
+                "padding-top": Math.max(padding, 0)
             });
         } else {
 
