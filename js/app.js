@@ -11,6 +11,7 @@ if (Meteor.isClient) {
 
     $(document).ready(function () {
 
+        // Setting the height so that the mobile window doesn't resize
         $('#bg').height($(window).height() + 60);
 
         // Stopping the enter key from doing anything (unless I tell it to, of course)

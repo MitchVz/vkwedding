@@ -4,6 +4,11 @@ if (Meteor.isClient) {
             $('#navbarMenuButton').click();
 
             goToPage(1);
+        },
+        'click #photoGalleryButton': function () {
+            $('#navbarMenuButton').click();
+
+            openPhotoSwipe();
         }
     });
 
