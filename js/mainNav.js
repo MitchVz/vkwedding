@@ -8,7 +8,7 @@ if (Meteor.isClient) {
         'click #photoGalleryButton': function () {
             $('#navbarMenuButton').click();
 
-            openPhotoSwipe();
+            initPhotoSwipeFromDOM('#mainGallery');
         }
     });
 

@@ -1,5 +1,51 @@
 <template name="photoGallery">
 
+    <div class="modal fade" id="photoModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" name="page-1">Photo Gallery</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div id="mainGallery">
+
+                            <div class="col-xs-6 col-sm-3">
+                                <a href="/images/gallery/photo_1_lg.jpg" data-size="3000x2132" data-med="/images/gallery/photo_1_sm.jpg" data-med-size="600x426">
+                                    <img src="/images/gallery/thumbs/photo_1_thumb.jpg" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3">
+                                <a href="/images/gallery/photo_21_lg.jpg" data-size="3000x2000" data-med="/images/gallery/photo_21_sm.jpg" data-med-size="600x400">
+                                    <img src="/images/gallery/thumbs/photo_21_thumb.jpg" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3">
+                                <a href="/images/gallery/photo_26_lg.jpg" data-size="3000x2000" data-med="/images/gallery/photo_26_sm.jpg" data-med-size="600x400">
+                                    <img src="/images/gallery/thumbs/photo_26_thumb.jpg" alt="" />
+                                </a>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-3">
+                                <a href="/images/gallery/photo_37_lg.jpg" data-size="3000x2000" data-med="/images/gallery/photo_37_sm.jpg" data-med-size="600x400">
+                                    <img src="/images/gallery/thumbs/photo_37_thumb.jpg" alt="" />
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
     <!--PhotoSwipe stuff-->
     <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
@@ -60,4 +106,5 @@
         </div>
 
     </div>
+
 </template>
