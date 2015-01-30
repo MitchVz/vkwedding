@@ -43,9 +43,9 @@ if (Meteor.isClient) {
                 }
 
 
-                var mediumSrc = el.getAttribute('data-med');
+                var mediumSrc = el.childNodes[1].getAttribute('data-med');
                 if(mediumSrc) {
-                    size = el.getAttribute('data-med-size').split('x');
+                    size = el.childNodes[1].getAttribute('data-med-size').split('x');
                     // "medium-sized" image
                     item.m = {
                         src: mediumSrc,
