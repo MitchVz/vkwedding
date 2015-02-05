@@ -17,6 +17,9 @@
     margin-top: 50px;
 }
 
+a {
+    color: #428bca;
+}
 
 .content {
     max-width: 580px;

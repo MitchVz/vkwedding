@@ -52,11 +52,11 @@ if (Meteor.isClient) {
 
 
         // Replacing the clock days, hours, and minutes labels
-        $('.flip-clock-divider.days').children(":first-child").html("<img src='/images/days_text.png'>");
+        $('.flip-clock-divider.days').children(":first-child").html("<img src='/images/clock/days_text.png'>");
 
-        $('.flip-clock-divider.hours').children(":first-child").html("<img src='/images/hours_text.png'>");
+        $('.flip-clock-divider.hours').children(":first-child").html("<img src='/images/clock/hours_text.png'>");
 
-        $('.flip-clock-divider.minutes').children(":first-child").html("<img src='/images/minutes_text.png'>");
+        $('.flip-clock-divider.minutes').children(":first-child").html("<img src='/images/clock/minutes_text.png'>");
 
 
         // Resizing the clock on load
