@@ -4,22 +4,34 @@ if (Meteor.isClient) {
 
     Template.rsvpModal.helpers({
         'guest': function() {
+            var searchQueries = Session.get('queries');
 
-            var searchQuery = Session.get('query');
-            if (searchQuery == "") {
+            if (searchQueries.length < 1) {
                 return null;
             } else {
-                return Guests.find(
-                    {Name: new RegExp(searchQuery, 'i')}, //'i' specifies case-insensitve
-                    {sort: { Name: 1 } }
-                );
+                var queryArray = [];
+                searchQueries.forEach( function (term) {
+                    queryArray.push( {SearchTerms: new RegExp(term, 'i')});
+                });
+                var query = {$and: queryArray };
+
+                var guests = Guests.find(query, {sort: {LastName: 1}});
+                return guests;
             }
         },
         'atLeastOneGuest': function() {
-            var searchQuery = Session.get('query');
-            return Guests.find(
-                                {Name: new RegExp(searchQuery, 'i')} //'i' specifies case-insensitve
-            ).count() > 0;
+            var searchQueries = Session.get('queries');
+
+            if (searchQueries.length < 1) {
+                return false;
+            }
+            var queryArray = [];
+            searchQueries.forEach( function (term) {
+                queryArray.push( {SearchTerms: new RegExp(term, 'i')});
+            });
+            var query = {$and: queryArray };
+
+            return Guests.find(query).count() > 0;
         },
         'selectedGuest': function() {
             return SelectedGuests.find();
@@ -64,8 +76,9 @@ if (Meteor.isClient) {
 
     Template.rsvpModal.events({
         'click #search': function () {
-            var query = $('#searchField').val();
-            Session.set('query', query);
+            var query = $('#searchField').val().toLowerCase();
+            var queries = query.split(' ');
+            Session.set('queries', queries);
 
             Meteor.call('rsvpForGuest', 'someIdString', 'true', function(err,response) {
                 if(err) {
@@ -139,13 +152,17 @@ if (Meteor.isClient) {
         'click #submit': function () {
 
             var coming = $("input:radio[name='attendRadios']:checked").val() == "confirm";
+            var song1 = $('#song1').val();
+            var song2 = $('#song2').val();
+            var song3 = $('#song3').val();
 
             SelectedGuests.find({}).forEach( function(guest) {
 
 
                 console.log("Guest: " + guest.Name);
                 console.log("Coming: " + coming);
-                Meteor.call('rsvpForGuest', guest._id, coming, function(err,response) {
+                console.log("Songs: " + song1 + ", " + song2 + ", " + song3);
+                Meteor.call('rsvpForGuest', guest._id, coming, song1, song2, song3, function(err,response) {
                     if(err) {
                         Session.set('serverDataResponse', "Error:" + err.reason);
                         console.log(err);
@@ -160,6 +177,20 @@ if (Meteor.isClient) {
             goToPage(4);
         },
         'click #addComment': function () {
+
+            var comment = $('#commentField').val();
+
+            SelectedGuests.find({}).forEach( function(guest) {
+                Meteor.call('addComment', guest._id, comment, function (err, response) {
+                    if (err) {
+                        Session.set('serverDataResponse', "Error:" + err.reason);
+                        console.log(err);
+                        console.log(err.reason);
+                        return;
+                    }
+                    Session.set('serverDataResponse', response);
+                });
+            });
 
             $("[name='commentConfirmationMessage']").show();
             $('#commentField').prop("disabled", true);

@@ -1,7 +1,6 @@
 Guests = new Mongo.Collection('guests');
 
 if (Meteor.isClient) {
-
     // Resize the clock whenever the window gets resized
     $(window).resize( function () {
         var width = $(window).width();
@@ -127,9 +126,14 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
       Meteor.methods({
-          rsvpForGuest: function (guestId, coming) {
+          rsvpForGuest: function (guestId, coming, song1, song2, song3) {
               Guests.update({_id: guestId},
-                  { $set : { Rsvp: true, Attending: coming }}
+                  { $set : { Rsvp: true, Attending: coming, Song1: song1, Song2: song2, Song3: song3 }}
+              );
+          },
+          addComment: function (guestId, comment) {
+              Guests.update({_id: guestId},
+                  { $set : { Comments: comment }}
               );
           }
       });

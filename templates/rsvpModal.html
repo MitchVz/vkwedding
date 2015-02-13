@@ -38,7 +38,7 @@
                                     {{#each guest}}
                                     <tr>
                                         <td><input type="checkbox"></td>
-                                        <td class="guest" data-id={{_id.toHexString}}>{{Name}}</td>
+                                        <td class="guest" data-id={{_id.toHexString}}>{{FirstName}} {{LastName}}</td>
                                         <td>{{{rsvpIcon}}}</td>
                                         <td>{{{attendingIcon}}}</td>
                                     </tr>
@@ -54,7 +54,7 @@
                         <!--Page 3-->
                         <div name="page-3" class="form-group" hidden>
                             {{#each selectedGuest}}
-                                <li><h4 style=" text-indent: 1em;" class="text-info">{{Name}}</h4></li>
+                                <li><h4 style=" text-indent: 1em;" class="text-info">{{FirstName}} {{LastName}}</h4></li>
                             {{/each}}
 
                             <div class="well clearfix">
@@ -93,7 +93,7 @@
                         <div name="page-4">
                             <h4>You have successfully RSVP'd for:</h4>
                             {{#each selectedGuest}}
-                                <li><h3 style=" text-indent: 1em;" class="text-success">{{Name}}</h3></li>
+                                <li><h3 style=" text-indent: 1em;" class="text-success">{{FirstName}} {{LastName}}</h3></li>
                             {{/each}}
                             <br>
                             <br>
