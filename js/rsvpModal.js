@@ -9,14 +9,10 @@ if (Meteor.isClient) {
             if (searchQueries.length < 1) {
                 return null;
             } else {
-                var queryArray = [];
-                searchQueries.forEach( function (term) {
-                    queryArray.push( {SearchTerms: new RegExp(term, 'i')});
-                });
-                var query = {$and: queryArray };
-
-                var guests = Guests.find(query, {sort: {LastName: 1}});
-                return guests;
+                // Meteor subscribe does the searching for us and adds the records to our guestlist on the client
+                // Then we call Guests.find({}) to get the records that we just subscribed to.
+                Meteor.subscribe('guestList', searchQueries);
+                return Guests.find({}, {sort: {LastName: 1} });
             }
         },
         'atLeastOneGuest': function() {
@@ -25,13 +21,8 @@ if (Meteor.isClient) {
             if (searchQueries.length < 1) {
                 return false;
             }
-            var queryArray = [];
-            searchQueries.forEach( function (term) {
-                queryArray.push( {SearchTerms: new RegExp(term, 'i')});
-            });
-            var query = {$and: queryArray };
-
-            return Guests.find(query).count() > 0;
+            Meteor.subscribe('guestList', searchQueries);
+            return Guests.find({}).count() > 0;
         },
         'selectedGuest': function() {
             return SelectedGuests.find();

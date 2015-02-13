@@ -124,20 +124,30 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  Meteor.startup(function () {
-      Meteor.methods({
-          rsvpForGuest: function (guestId, coming, song1, song2, song3) {
-              Guests.update({_id: guestId},
-                  { $set : { Rsvp: true, Attending: coming, Song1: song1, Song2: song2, Song3: song3 }}
-              );
-          },
-          addComment: function (guestId, comment) {
-              Guests.update({_id: guestId},
-                  { $set : { Comments: comment }}
-              );
-          }
-      });
-  });
+    Meteor.startup(function () {
+        Meteor.methods({
+            rsvpForGuest: function (guestId, coming, song1, song2, song3) {
+                Guests.update({_id: guestId},
+                    { $set : { Rsvp: true, Attending: coming, Song1: song1, Song2: song2, Song3: song3 }}
+                );
+            },
+            addComment: function (guestId, comment) {
+                Guests.update({_id: guestId},
+                    { $set : { Comments: comment }}
+                );
+            }
+        });
+    });
 
+    // takes an array of strings as search queries and returns the specified guests
+    Meteor.publish('guestList', function (queries) {
+        var queryArray = [];
+        queries.forEach( function (term) {
+            queryArray.push( {SearchTerms: new RegExp(term, 'i')});
+        });
+        var query = {$and: queryArray };
+
+        return Guests.find(query);
+    });
 
 }
