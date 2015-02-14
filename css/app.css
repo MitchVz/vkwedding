@@ -16,6 +16,9 @@
 .modal-dialog {
     margin-top: 50px;
 }
+.modal-content > .modal-content-center {
+    text-align: center;
+}
 
 a {
     color: #428bca;

@@ -10,6 +10,17 @@ if (Meteor.isClient) {
 
     $(document).ready(function () {
 
+        // Show modal if first time visiting th page
+        if (typeof $.cookie('visited') === "undefined") {
+            $('#firstVisitModal').modal({
+                show: true
+            });
+
+            // create the visited cookie
+            $.cookie('visited', 'true', { expires: 20000 });
+        }
+
+
         // Setting the height so that the mobile window doesn't resize
         $('#bg').height($(window).height() + 60);
 

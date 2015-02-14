@@ -6,7 +6,7 @@ if (Meteor.isClient) {
         'guest': function() {
             var searchQueries = Session.get('queries');
 
-            if (searchQueries.length < 1) {
+            if (searchQueries == null) {
                 return null;
             } else {
                 // Meteor subscribe does the searching for us and adds the records to our guestlist on the client
@@ -18,7 +18,7 @@ if (Meteor.isClient) {
         'atLeastOneGuest': function() {
             var searchQueries = Session.get('queries');
 
-            if (searchQueries.length < 1) {
+            if (searchQueries == null) {
                 return false;
             }
             Meteor.subscribe('guestList', searchQueries);
