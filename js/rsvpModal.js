@@ -146,13 +146,24 @@ if (Meteor.isClient) {
             var song1 = $('#song1').val();
             var song2 = $('#song2').val();
             var song3 = $('#song3').val();
+            var numberOfGuestsRegistered = SelectedGuests.find({}).count();
+            var guestNames = "";
+            var guestCounter = 1;
 
             SelectedGuests.find({}).forEach( function(guest) {
 
+                if (numberOfGuestsRegistered == 1) {
+                    guestNames = guest.FirstName + ' ' + guest.LastName;
+                } else {
+                    if (guestCounter == 1) {
+                        guestNames = guest.FirstName + ' ' + guest.LastName;
+                    } else if (guestCounter < numberOfGuestsRegistered) {
+                        guestNames += ", " + guest.FirstName + ' ' + guest.LastName;
+                    } else {
+                        guestNames += " and " + guest.FirstName + ' ' + guest.LastName;
+                    }
+                }
 
-                console.log("Guest: " + guest.Name);
-                console.log("Coming: " + coming);
-                console.log("Songs: " + song1 + ", " + song2 + ", " + song3);
                 Meteor.call('rsvpForGuest', guest._id, coming, song1, song2, song3, function(err,response) {
                     if(err) {
                         Session.set('serverDataResponse', "Error:" + err.reason);
@@ -162,7 +173,38 @@ if (Meteor.isClient) {
                     }
                     Session.set('serverDataResponse', response);
                 });
+
+                guestCounter++;
             });
+
+            var emailSubject = guestNames + " just RSVP\'d!"
+            var emailMessage = "";
+
+            if (numberOfGuestsRegistered == 1) {
+                emailMessage = "Hi Mitch and Cath,\r\rThis message is to let you know that " +
+                guestNames + " just created his/her RSVP for your wedding!";
+            } else {
+                emailMessage = "Hi Mitch and Cath,\r\rThis message is to let you know that " +
+                guestNames + " just created their RSVPs for your wedding!";
+            }
+
+            if (coming) {
+                emailMessage += "\r\rThey have registered as coming!\rAnd they chose the following songs:";
+                emailMessage += "\r" + song1;
+                emailMessage += "\r" + song2;
+                emailMessage += "\r" + song3;
+            } else {
+                emailMessage += "\r\rUnfortunately, they have made the biggest mistake of their lives and are not coming.";
+                emailMessage += "\rSorry about that.";
+            }
+            emailMessage += "\r\rLove,\rThe Website"
+
+            Meteor.call('sendEmail',
+                'vanderkram@gmail.com',
+                'vkwedding@betterthanyou.com',
+                emailSubject,
+                emailMessage
+            );
 
 
             goToPage(4);

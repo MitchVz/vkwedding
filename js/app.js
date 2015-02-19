@@ -136,6 +136,11 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
+        // Setup mailgun
+        process.env.MAIL_URL =
+            'smtp://postmaster%40sandbox6112951ad480473caea1f23c3588c035.mailgun.org:dda1809f68bdf36955749c6fd1457211@smtp.mailgun.org:587';
+
+
         Meteor.methods({
             rsvpForGuest: function (guestId, coming, song1, song2, song3) {
                 Guests.update({_id: guestId},
@@ -146,6 +151,20 @@ if (Meteor.isServer) {
                 Guests.update({_id: guestId},
                     { $set : { Comments: comment }}
                 );
+            },
+            sendEmail: function (to, from, subject, text) {
+                check([to, from, subject, text], [String]);
+
+                // Let other method calls from the same client start running,
+                // without waiting for the email sending to complete.
+                this.unblock();
+
+                Email.send({
+                    to: to,
+                    from: from,
+                    subject: subject,
+                    text: text
+                });
             }
         });
     });
