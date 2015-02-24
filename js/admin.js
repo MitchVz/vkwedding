@@ -47,12 +47,14 @@ if (Meteor.isClient) {
     });
 
     Template.admin.events({
-        'click #download-csv': function (e) {
+        'click #download-csv': function () {
 
             Meteor.subscribe('allGuests');
-            csv = json2csv(Guests.find({}).fetch(), true, true);
-            e.target.href = "data:text/csv;charset=utf-8," + escape(csv);
-            e.target.download = "guests.csv";
+
+            var csvStringArray = buildCsvString(Guests.find().fetch());
+
+            var blob = new Blob(csvStringArray, {type: "data:text/csv;charset=utf-8"});
+            saveAs(blob, "GuestsForCath.csv");
         },
         'click .reactive-table tr': function (event) {
 
@@ -95,5 +97,24 @@ if (Meteor.isClient) {
             return "";
         }
     };
+    buildCsvString = function (jsonObject) {
+        var csvStringArray = ["FirstName,LastName,Rsvp,Attending,Song1,Song2,Song3,Comments"];
+
+        jsonObject.forEach( function (guest) {
+            csvStringArray[0] += "\n" +
+                guest.FirstName + "," +
+                guest.LastName + "," +
+                guest.Rsvp + "," +
+                guest.Attending + "," +
+                "\"" + guest.Song1 + "\"," +
+                "\"" + guest.Song2 + "\"," +
+                "\"" + guest.Song3 + "\"," +
+                "\"" + guest.Comments + "\"";
+        });
+
+        console.log(csvStringArray);
+        return csvStringArray;
+    }
+
 }
 
