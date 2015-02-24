@@ -1,0 +1,53 @@
+.content-admin {
+    max-width: 1000px;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
+    margin: auto;
+    background: rgba(255,255,255,0.7);
+    background: #FFF \9;
+    overflow: hidden;
+    z-index: 3;
+    position: relative;
+    box-shadow: 0px 3px 5px rgba(0,0,0,0.7);
+}
+span.angletop-admin {
+    border: 10px solid transparent;
+    margin: auto;
+    border-top-width: 15px;
+    border-bottom: 10px solid rgba(255,255,255,0.7) !important;
+    border-bottom: 10px solid #FFF !important \9;
+    z-index: 2;
+    max-width: 1000px;
+    display: block;
+    position: relative;
+}
+span.logoangletop-admin {
+    border: 50px solid transparent;
+    border-bottom: 35px solid rgba(255, 255, 255, 0.7) !important;
+    border-bottom: 35px solid #FFF !important \9;
+    z-index: 3;
+    width: 0px;
+    margin: 100px auto -28px;
+    display: block;
+    position: relative;
+}
+span.anglebottom-admin {
+    border: 10px solid transparent;
+    border-top: 10px solid rgba(255, 255, 255, 0.7) !important;
+    border-top: 10px solid #FFF !important \9;
+    z-index: 4;
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+}
+.admin-table-header {
+    margin-top: 100px;
+}
+.content-padded-admin {
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.reactive-table {
+    background: rgba(255,255,255,0.8);
+}

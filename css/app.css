@@ -108,7 +108,7 @@ img {
     overflow-y: hidden;
 }
 .modal .modal-body {
-    max-height: 420px;
+    max-height: 60vh;
     overflow-y: auto;
 }
 .highlight-row {

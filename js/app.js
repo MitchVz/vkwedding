@@ -180,4 +180,9 @@ if (Meteor.isServer) {
         return Guests.find(query);
     });
 
+    // Returns everything in the Guests collection
+    Meteor.publish('allGuests', function () {
+        return Guests.find({}, {sort: {LastName: 1} });
+    });
+
 }
