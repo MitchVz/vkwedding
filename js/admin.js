@@ -112,7 +112,6 @@ if (Meteor.isClient) {
                 "\"" + guest.Comments + "\"";
         });
 
-        console.log(csvStringArray);
         return csvStringArray;
     }
 
