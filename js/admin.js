@@ -76,6 +76,9 @@ if (Meteor.isClient) {
             if (typeof this.FirstName != 'undefined') {
                 $('#songModal').modal('show');
             }
+        },
+        'click #logout': function () {
+            Meteor.logout();
         }
     });
 
@@ -114,6 +117,5 @@ if (Meteor.isClient) {
 
         return csvStringArray;
     }
-
 }
 

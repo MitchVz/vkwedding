@@ -5,5 +5,16 @@ if (Meteor.isClient) {
         }
     });
 
+    Template.firstVisitModal.rendered = function() {
+
+        // Show modal if first time visiting the page
+        if (typeof $.cookie('visited') === "undefined") {
+            $('#firstVisitModal').modal('show');
+
+            // create the visited cookie
+            $.cookie('visited', 'true', { expires: 20000 });
+        }
+    }
+
 }
 

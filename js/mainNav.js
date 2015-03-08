@@ -9,9 +9,6 @@ if (Meteor.isClient) {
             $('#navbarMenuButton').click();
 
             initPhotoSwipeFromDOM('#mainGallery');
-        },
-        'click #clearCookie': function () {
-            $.removeCookie('visited');
         }
     });
 
