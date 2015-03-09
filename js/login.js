@@ -3,6 +3,12 @@ if (Meteor.isClient) {
     Accounts.config({
         forbidClientAccountCreation: true
     });
+
+    //Template.login.events({
+    //    'click #loginButton': function () {
+    //        $('#loginModal').modal('show');
+    //    }
+    //});
 }
 
 if (Meteor.isServer) {

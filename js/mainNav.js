@@ -9,6 +9,15 @@ if (Meteor.isClient) {
             $('#navbarMenuButton').click();
 
             initPhotoSwipeFromDOM('#mainGallery');
+        },
+        'click #foodNavButton': function () {
+            $('#navbarMenuButton').click();
+        },
+        'click #registryNavButton': function () {
+            $('#navbarMenuButton').click();
+        },
+        'click #mapNavButton': function () {
+            $('#navbarMenuButton').click();
         }
     });
 

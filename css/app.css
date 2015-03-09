@@ -124,7 +124,10 @@ img {
 .song-input {
     margin-top: 10px;
 }
-
+.map-container {
+    width: 100%;
+    height: 200px;
+}
 
 
 /* Countdown timer stuff */
