@@ -125,9 +125,20 @@ img {
     margin-top: 10px;
 }
 .map-container {
-    width: 100%;
     height: 200px;
+    width: 100%;
 }
+/** FIX for Bootstrap and Google Maps Info window styles problem **/
+img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
+    max-width: none;
+}
+#chrome-fix {
+    -webkit-transform: scale3d(1,1,1);
+}
+.gmnoprint {
+    -webkit-transform: scale3d(1,1,1);
+}
+
 
 
 /* Countdown timer stuff */

@@ -6,12 +6,41 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" name="page-1">Maps to places</h4>
+                    <h4 class="modal-title" name="page-1">Maps and Directions</h4>
                 </div>
 
                 <div class="modal-body">
-                    <div class="map-container">
-                        {{> googleMap name="exampleMap" options=exampleMapOptions}}
+
+                    <hr class="dots">
+                    <div class="text-center">
+                        <h2 style="color: #4E5D6C"><strong>The Ceremony</strong></h2>
+                    </div>
+                    <hr class="dots">
+
+                    <div class="text-center">
+                        <p>Our ceremony will be held at <a class="text-danger" href="http://www.crcg.org/"><strong>The Christian Reformed Conference Grounds.</strong></a></p>
+                        <i style="color: #38AAAC"><strong>We are having an outdoor ceremony, so be sure to dress for success!</strong></i>
+                        <br/><br/>
+                        <div class="map-container">
+                            {{> googleMap name="conferenceGroundsMap" options=conferenceGroundsMapOptions}}
+                        </div>
+                    </div>
+
+                    <br/><br/>
+
+                    <hr class="dots">
+                    <div class="text-center">
+                        <h2 style="color: #4E5D6C"><strong>The Reception</strong></h2>
+                    </div>
+                    <hr class="dots">
+
+                    <div class="text-center">
+                        <p>Our reception will be held at <a class="text-danger" href="http://sentonmission.com/"><strong>Watermark Church.</strong></a></p>
+                        <i style="color: #38AAAC"><strong>This part is indoors, but just wear what you wore to the ceremony. We won't judge!</strong></i>
+                        <br/><br/>
+                        <div class="map-container">
+                            {{> googleMap name="watermarkMap" options=watermarkMapOptions}}
+                        </div>
                     </div>
                 </div>
 
