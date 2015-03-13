@@ -18,7 +18,7 @@ if (Meteor.isClient) {
         'atLeastOneGuest': function() {
             var searchQueries = Session.get('queries');
 
-            if (searchQueries == null) {
+            if (searchQueries == null || searchQueries.toString().length < 3) {
                 return false;
             }
             Meteor.subscribe('guestList', searchQueries);
@@ -241,7 +241,7 @@ if (Meteor.isClient) {
         },
         'keyup #searchField': function (event) {
 
-            if ($(event.target).val().length > 0) {
+            if ($(event.target).val().length > 2) {
                 $('#search').prop("disabled", false);
             } else {
                 $('#search').prop("disabled", true);
@@ -262,6 +262,9 @@ if (Meteor.isClient) {
             case 1:
                 $("[name='page-1']").show();
                 Session.set('currentPage', 1);
+
+                // Clear comment section just in case
+                $('#commentField').val("");
 
                 // unchecking all checkboxes on page 2
                 SelectedGuests.remove({});
@@ -289,6 +292,12 @@ if (Meteor.isClient) {
                 break;
             case 4:
                 $("[name='page-4']").show();
+
+                // Clear page 3
+                $('#song1').val("");
+                $('#song2').val("");
+                $('#song3').val("");
+
                 $("[name='commentConfirmationMessage']").hide();
                 $('#commentField').prop("disabled", false);
                 $('#addComment').show();

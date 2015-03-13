@@ -151,6 +151,8 @@ if (Meteor.isServer) {
 
     // takes an array of strings as search queries and returns the specified guests
     Meteor.publish('guestList', function (queries) {
+        if (queries.toString().length < 3)
+            return [];
         var queryArray = [];
         queries.forEach( function (term) {
             queryArray.push( {SearchTerms: new RegExp(term, 'i')});
@@ -162,7 +164,7 @@ if (Meteor.isServer) {
 
     // Returns everything in the Guests collection
     Meteor.publish('allGuests', function () {
-        return Guests.find({}, {sort: {LastName: 1} });
+        if (this.userId) return Guests.find({}, {sort: {LastName: 1} });
     });
 
 }

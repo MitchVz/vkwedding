@@ -16,6 +16,7 @@ if (Meteor.isClient) {
                     center: new google.maps.LatLng(42.991846, -86.222291),
                     zoom: 14,
                     scrollwheel: false,
+                    draggable: false,
                     mapTypeControl: false,
                     streetViewControl: false,
                     zoomControl: true,
@@ -35,6 +36,7 @@ if (Meteor.isClient) {
                     zoom: 14,
                     scrollwheel: false,
                     mapTypeControl: false,
+                    draggable: false,
                     streetViewControl: false,
                     zoomControl: true,
                     zoomControlOptions: {
