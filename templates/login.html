@@ -2,12 +2,12 @@
 
     {{> loginButtons}}
 
-    <!--<btn id="loginButton">Login</btn>-->
+    <btn id="loginButton" class="btn btn-sm btn-primary pull-right">Login</btn>
 
-    <!--<div id="loginModal" class="modal fade">-->
-        <!--<div class="modal-dialog modal-sm">-->
-            <!--<div class="modal-content">-->
-                <!--<div class="modal-body">-->
+    <div id="loginModal" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-body" style="width: 500px; height: 500px;">
 
                     <!--<input id="login-email" type="email" placeholder="Email" class="form-control">-->
                     <!--<input id="login-password" type="password" placeholder="Password" class="form-control">-->
@@ -15,17 +15,34 @@
                     <!--<button class="btn btn-primary col-xs-12 col-sm-12" id="login-buttons-password" type="button">-->
                         <!--Sign in-->
                     <!--</button>-->
-
-                <!--</div>-->
-                <!--<div class="modal-footer">-->
                     <!--<div id="login-other-options">-->
                         <!--<a id="forgot-password-link" class="pull-left">Forgot password?</a>-->
                     <!--</div>-->
+
+                    <li id="login-dropdown-list" class="dropdown open">
+                        <a class="dropdown-toggle">Sign in <b class="caret"></b></a>
+                        <div class="dropdown-menu">
+                            <input id="login-email" type="email" placeholder="Email" class="form-control">
+                            <input id="login-password" type="password" placeholder="Password" class="form-control">
+
+                            <button class="btn btn-primary col-xs-12 col-sm-12" id="login-buttons-password" type="button">
+                                Sign in
+                            </button>
+
+                            <div id="login-other-options">
+                                <a id="forgot-password-link" class="pull-left">Forgot password?</a>
+                            </div>
+                        </div>
+                    </li>
+
+                </div>
+                <!--<div class="modal-footer">-->
+
                 <!--</div>-->
 
-            <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-        <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-    <!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <div id="loginFailModal" class="modal fade">
         <div class="modal-dialog modal-sm">

@@ -4,11 +4,11 @@ if (Meteor.isClient) {
         forbidClientAccountCreation: true
     });
 
-    //Template.login.events({
-    //    'click #loginButton': function () {
-    //        $('#loginModal').modal('show');
-    //    }
-    //});
+    Template.login.events({
+        'click #loginButton': function () {
+            $('#loginModal').modal('show');
+        }
+    });
 }
 
 if (Meteor.isServer) {
