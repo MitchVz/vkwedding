@@ -13,6 +13,23 @@
     object-position: center 20%;
 }
 
+/*Customizing the backgroud for stupid firefox*/
+@-moz-document url-prefix() {
+    #bg {
+        position: fixed;
+        top: 0px;
+        left: 0;
+        width: 100%;
+    }
+    #bg img {
+        background-size: cover;
+        display: block;
+        width: 100vw;
+        object-fit: none;
+        height: auto;
+    }
+}
+
 .modal-dialog {
     margin-top: 50px;
 }
