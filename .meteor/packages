@@ -8,7 +8,6 @@ less
 nemo64:bootstrap
 
 mrt:meteor-flipclockjs
-jquery-ui
 reactive-var
 jquery
 spectrum:photoswipe
