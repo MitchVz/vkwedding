@@ -4,8 +4,7 @@ if (Meteor.isClient) {
         'click #addMenuComment': function () {
             var name = $('#menuNameField').val();
             var comment = $('#menuCommentField').val();
-            console.log(name);
-            console.log(comment);
+
             sendMenuEmail(name, comment);
 
             $('#menuCommentDiv').hide();

@@ -118,7 +118,7 @@ if (Meteor.isServer) {
     Meteor.startup(function () {
         // Setup mailgun
         process.env.MAIL_URL =
-            'smtp://postmaster%40sandbox6112951ad480473caea1f23c3588c035.mailgun.org:dda1809f68bdf36955749c6fd1457211@smtp.mailgun.org:587';
+            'smtp://postmaster%40mail.mitchandcathwedding.com:3886854cf223bc7aa9c2562184d2880e@smtp.mailgun.org:587';
 
 
         Meteor.methods({
