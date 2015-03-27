@@ -13,6 +13,10 @@ if (Meteor.isClient) {
             $('.flip-clock-divider.hours').children(":first-child").html("<img src='/images/clock/hours_text.png'>");
 
             $('.flip-clock-divider.minutes').children(":first-child").html("<img src='/images/clock/minutes_text.png'>");
+
+            // Resizing the clock on load
+            var width = $(window).width();
+            resizeClock(width);
         }
     }
 
