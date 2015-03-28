@@ -19,9 +19,6 @@ if (Meteor.isClient) {
         },
         'click #mapNavButton': function () {
             $('#navbarMenuButton').click();
-        },
-        'click #clearCookie': function () {
-            $.removeCookie('visited');
         }
     });
 
