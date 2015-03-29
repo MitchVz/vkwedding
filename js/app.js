@@ -76,6 +76,14 @@ if (Meteor.isClient) {
                 "height": height,
                 "padding-top": Math.max(padding, 0)
             });
+
+            // Centering the clock with linear regressions
+            // Comment back in at < 100 days!!!
+            //var clockWidth = (.858 * width) - 54;
+            //$('.my-clock').parent().css({
+            //    "width": clockWidth
+            //});
+
         } else {
 
             $('.my-clock').css({
@@ -88,6 +96,11 @@ if (Meteor.isClient) {
                 "height": "",
                 "padding-top": ""
             });
+
+            // Comment back in at less than 100 days!!!
+            //$('.my-clock').parent().css({
+            //    "width": "466px"
+            //});
         }
     };
 
