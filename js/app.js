@@ -97,7 +97,7 @@ if (Meteor.isClient) {
                 "padding-top": ""
             });
 
-            // Comment back in at less than 100 days!!!
+            // Comment back in at less than 100 days
             //$('.my-clock').parent().css({
             //    "width": "466px"
             //});
@@ -146,11 +146,14 @@ if (Meteor.isServer) {
                 );
             },
             sendEmail: function (to, from, subject, text) {
-                check([to, from, subject, text], [String]);
 
-                // Let other method calls from the same client start running,
-                // without waiting for the email sending to complete.
-                this.unblock();
+                // March 30, 8:00pm commented these out to try to get the mailgun errors to go away
+
+                //check([to, from, subject, text], [String]);
+                //
+                //// Let other method calls from the same client start running,
+                //// without waiting for the email sending to complete.
+                //this.unblock();
 
                 Email.send({
                     to: to,
