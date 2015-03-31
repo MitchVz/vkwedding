@@ -1,59 +1,38 @@
 <template name="login">
 
-    {{> loginButtons}}
-
-    <btn id="loginButton" class="btn btn-sm btn-primary pull-right">Login</btn>
-
     <div id="loginModal" class="modal fade">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <div class="modal-body" style="width: 500px; height: 500px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Login to Admin</h4>
+                </div>
+                <form class="">
+                    <div class="modal-body">
 
-                    <!--<input id="login-email" type="email" placeholder="Email" class="form-control">-->
-                    <!--<input id="login-password" type="password" placeholder="Password" class="form-control">-->
-
-                    <!--<button class="btn btn-primary col-xs-12 col-sm-12" id="login-buttons-password" type="button">-->
-                        <!--Sign in-->
-                    <!--</button>-->
-                    <!--<div id="login-other-options">-->
-                        <!--<a id="forgot-password-link" class="pull-left">Forgot password?</a>-->
-                    <!--</div>-->
-
-                    <li id="login-dropdown-list" class="dropdown open">
-                        <a class="dropdown-toggle">Sign in <b class="caret"></b></a>
-                        <div class="dropdown-menu">
+                        <div class="form-group">
                             <input id="login-email" type="email" placeholder="Email" class="form-control">
-                            <input id="login-password" type="password" placeholder="Password" class="form-control">
-
-                            <button class="btn btn-primary col-xs-12 col-sm-12" id="login-buttons-password" type="button">
-                                Sign in
-                            </button>
-
-                            <div id="login-other-options">
-                                <a id="forgot-password-link" class="pull-left">Forgot password?</a>
-                            </div>
                         </div>
-                    </li>
+                        <div class="form-group">
+                            <input id="login-password" type="password" placeholder="Password" class="form-control">
+                        </div>
 
-                </div>
-                <!--<div class="modal-footer">-->
+                        <div id="failedLogin" class="alert alert-danger" style="display: none">
+                            <strong>Login Failed</strong>
+                            <p>Invalid email or password.</p>
+                        </div>
 
-                <!--</div>-->
+                    </div>
+                    <div class="modal-footer">
+
+                        <button id="login" class="btn btn-primary col-xs-12 col-sm-12" type="submit">
+                            Sign in
+                        </button>
+                    </div>
+                </form>
 
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <div id="loginFailModal" class="modal fade">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <p>Sorry, only Mitch and Cath may view this page.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
 </template>

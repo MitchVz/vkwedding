@@ -24,7 +24,7 @@ if (Meteor.isClient) {
 
         Meteor.call('sendEmail',
             'vanderkram@gmail.com',
-            'thewebsite@mitchandcathwedding.com',
+            'postmaster@mitchandcathwedding.com',
             emailSubject,
             emailMessage
         );

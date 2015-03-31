@@ -201,7 +201,7 @@ if (Meteor.isClient) {
 
             Meteor.call('sendEmail',
                 'vanderkram@gmail.com',
-                'vkwedding@betterthanyou.com',
+                'postmaster@mitchandcathwedding.com',
                 emailSubject,
                 emailMessage
             );

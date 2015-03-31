@@ -3,10 +3,17 @@ var OnBeforeActions;
 OnBeforeActions = {
     loginRequired: function(pause) {
         if (!Meteor.userId()) {
+            Session.set('currentPage', 5);
+
+
+
             this.render('login');
-            $('#loginModal').modal('show');
             //return pause();
         } else {
+            $('#loginModal').modal('hide');
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+
             this.render('admin');
             //return;
         }

@@ -7,13 +7,13 @@ if (Meteor.isClient) {
         },
         settings: function () {
             return {
-                rowsPerPage: 10,
+                rowsPerPage: 300,
                 showFilter: true,
                 fields: [
                     { key: 'FirstName', label: 'First Name' },
-                    { key: 'LastName', label: 'Last Name', sort: '1' },
+                    { key: 'LastName', label: 'Last Name' },
                     { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }},
-                    { key: 'Attending', label: 'Attending', fn: function (value, object) { return attendingIcon(object); }},
+                    { key: 'Attending', label: 'Attending', fn: function (value, object) { return attendingIcon(object); }, sort: -1},
 
                     // Uncomment this to allow for searching by song suggestions
                     //{ key: 'Song1', label: 'Song 1', hidden: true},
