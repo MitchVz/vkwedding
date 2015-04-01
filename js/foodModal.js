@@ -5,6 +5,16 @@ if (Meteor.isClient) {
             var name = $('#menuNameField').val();
             var comment = $('#menuCommentField').val();
 
+            Meteor.call('addMenuComment', name, comment, function (err, response) {
+                if (err) {
+                    Session.set('serverDataResponse', "Error:" + err.reason);
+                    console.log(err);
+                    console.log(err.reason);
+                    return;
+                }
+                Session.set('serverDataResponse', response);
+            });
+
             sendMenuEmail(name, comment);
 
             $('#menuCommentDiv').hide();

@@ -1,4 +1,5 @@
 Guests = new Mongo.Collection('guests');
+Comments = new Mongo.Collection('comments');
 
 if (Meteor.isClient) {
     // Resize the clock whenever the window gets resized
@@ -163,7 +164,12 @@ if (Meteor.isServer) {
                     subject: subject,
                     text: text
                 });
-
+            },
+            addMenuComment: function (name, comment) {
+                Comments.insert({
+                    Name: name,
+                    Comment: comment
+                });
             }
         });
     });
