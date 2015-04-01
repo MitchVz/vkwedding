@@ -10,16 +10,18 @@ if (Meteor.isClient) {
                 rowsPerPage: 300,
                 showFilter: true,
                 fields: [
+                    { key: 'Edit', fn: function () { return editIcon()}},
                     { key: 'FirstName', label: 'First Name' },
                     { key: 'LastName', label: 'Last Name' },
-                    { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }},
-                    { key: 'Attending', label: 'Attending', fn: function (value, object) { return attendingIcon(object); }, sort: -1},
+                    { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }, sort: -1},
+                    { key: 'Attending', label: 'Attending', fn: function (value, object) { return attendingIcon(object); }},
 
                     // Uncomment this to allow for searching by song suggestions
                     //{ key: 'Song1', label: 'Song 1', hidden: true},
                     //{ key: 'Song2', label: 'Song 2', hidden: true},
                     //{ key: 'Song3', label: 'Song 3', hidden: true},
                     { key: 'SearchTerms', hidden: true}
+
                 ]
             };
         },
@@ -88,6 +90,11 @@ if (Meteor.isClient) {
         } else {
             return "";
         }
+    };
+    editIcon = function () {
+        return new Spacebars.SafeString('<button class="btn btn-xs btn-default"> \
+                                            <i class="glyphicon glyphicon-pencil"></i> \
+                                        </button>');
     };
     attendingIcon = function (object) {
         if (object.Rsvp) {

@@ -134,7 +134,7 @@ if (Meteor.isServer) {
     Meteor.startup(function () {
         // Setup mailgun
         process.env.MAIL_URL =
-            'smtp://postmaster%40mail.mitchandcathwedding.com:3886854cf223bc7aa9c2562184d2880e%40smtp.mailgun.org:587';
+            'smtp://postmaster@mail.mitchandcathwedding.com:3886854cf223bc7aa9c2562184d2880e@smtp.mailgun.org:587';
 
 
         Meteor.methods({
@@ -157,14 +157,13 @@ if (Meteor.isServer) {
                 // without waiting for the email sending to complete.
                 this.unblock();
 
-                Meteor.setTimeout(function() {
-                    Email.send({
-                        to: to,
-                        from: from,
-                        subject: subject,
-                        text: text
-                    });
-                }, 0);
+                Email.send({
+                    to: to,
+                    from: from,
+                    subject: subject,
+                    text: text
+                });
+
             }
         });
     });
