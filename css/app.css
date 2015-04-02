@@ -196,11 +196,10 @@ and (min-width: 621px) {
     /* fix clock re-rendering issue */
     -webkit-transform: translate3d(0,0,0);
 }
-/*.flip-clock-divider .flip-clock-label {*/
-    /*font-size: 22px;*/
-    /*font-family: monospace;*/
-    /*color: white;*/
-/*}*/
+.flip {
+     /*fix clock re-rendering issue on mobile*/
+    -webkit-transform: translate3d(0,0,0);
+}
 .flip-clock-divider.days .flip-clock-label {
     font-size: 25px;
     right: -96px;
