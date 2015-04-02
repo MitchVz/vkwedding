@@ -41,6 +41,14 @@ a {
     color: #428bca;
 }
 
+.navbar-fixed-top {
+    top: 0;
+    border-width: 0px 0 3px;
+}
+.navbar-default {
+    border-color: #D8D8D8;
+}
+
 .content {
     max-width: 580px;
     /*margin-left: 20px;*/
@@ -69,6 +77,7 @@ a {
     margin: auto 20px auto;
 }
 span.angletop {
+    -webkit-transform: translate3d(0,0,0);
     border: 10px solid transparent;
     margin: auto;
     border-top-width: 15px;
@@ -182,6 +191,10 @@ and (min-width: 621px) {
     color: #F7F9FA;
     background-color: #4E5D6C;
 
+}
+#clock-div {
+    /* fix clock re-rendering issue */
+    -webkit-transform: translate3d(0,0,0);
 }
 /*.flip-clock-divider .flip-clock-label {*/
     /*font-size: 22px;*/

@@ -10,7 +10,7 @@ if (Meteor.isClient) {
                 rowsPerPage: 300,
                 showFilter: true,
                 fields: [
-                    { key: 'Edit', fn: function () { return editIcon()}},
+                    { key: 'Edit', label: '', fn: function () { return editIcon()}},
                     { key: 'FirstName', label: 'First Name' },
                     { key: 'LastName', label: 'Last Name' },
                     { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }, sort: -1},
@@ -27,6 +27,15 @@ if (Meteor.isClient) {
         },
         'selectedGuest': function () {
             return Session.get('Attendee');
+        },
+        'firstName': function () {
+            return Session.get('FirstName');
+        },
+        'lastName': function () {
+            return Session.get('LastName');
+        },
+        'searchTerms': function () {
+            return Session.get('SearchTerms');
         },
         'rsvp': function () {
             return Session.get('Rsvp');
@@ -59,28 +68,42 @@ if (Meteor.isClient) {
             saveAs(blob, "GuestsForCath.csv");
         },
         'click .reactive-table tr': function (event) {
-
-            Session.set('Attendee', this.FirstName + ' ' + this.LastName);
-            Session.set('Rsvp', this.Rsvp);
-            Session.set('Attending', this.Attending);
-            if (this.Attending) {
-                Session.set('Song1', this.Song1);
-                Session.set('Song2', this.Song2);
-                Session.set('Song3', this.Song3);
-                Session.set('Comments', this.Comments);
-            } else {
-                Session.set('Song1', '');
-                Session.set('Song2', '');
-                Session.set('Song3', '');
-                Session.set('Comments', false);
+            var clickedElement = event.target.nodeName;
+            if (clickedElement == "I" || clickedElement == "BUTTON") {
+                Session.set('Attendee', this.FirstName + ' ' + this.LastName);
+                Session.set('FirstName', this.FirstName);
+                Session.set('LastName', this.LastName);
+                Session.set('SearchTerms', this.SearchTerms);
+                editGuest(this);
             }
+            else {
 
-            if (typeof this.FirstName != 'undefined') {
-                $('#songModal').modal('show');
+                Session.set('Attendee', this.FirstName + ' ' + this.LastName);
+                Session.set('Rsvp', this.Rsvp);
+                Session.set('Attending', this.Attending);
+                if (this.Attending) {
+                    Session.set('Song1', this.Song1);
+                    Session.set('Song2', this.Song2);
+                    Session.set('Song3', this.Song3);
+                    Session.set('Comments', this.Comments);
+                } else {
+                    Session.set('Song1', '');
+                    Session.set('Song2', '');
+                    Session.set('Song3', '');
+                    Session.set('Comments', false);
+                }
+
+                if (typeof this.FirstName != 'undefined') {
+                    $('#songModal').modal('show');
+                }
             }
         },
         'click #logout': function () {
             Meteor.logout();
+        },
+        'click #addButton': function () {
+
+            console.log("adding!");
         }
     });
 
@@ -92,9 +115,10 @@ if (Meteor.isClient) {
         }
     };
     editIcon = function () {
-        return new Spacebars.SafeString('<button class="btn btn-xs btn-default"> \
-                                            <i class="glyphicon glyphicon-pencil"></i> \
-                                        </button>');
+        var button =    '<button class="btn btn-xs btn-primary edit-button" > \
+                            <i class="glyphicon glyphicon-pencil"></i> \
+                        </button>';
+        return new Spacebars.SafeString(button);
     };
     attendingIcon = function (object) {
         if (object.Rsvp) {
@@ -123,6 +147,9 @@ if (Meteor.isClient) {
         });
 
         return csvStringArray;
-    }
+    };
+    editGuest = function() {
+        $('#editModal').modal('show');
+    };
 }
 
