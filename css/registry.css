@@ -1,0 +1,25 @@
+.registry-div {
+    min-height: 255px;
+}
+.registry-image.left {
+    max-width: 150px;
+    margin: 20px;
+}
+.registry-image.right {
+    max-width: 160px;
+    margin: 20px;
+}
+.registry-image.left:hover {
+    max-width: 165px;
+    margin: 16px;
+}
+.registry-image.right:hover {
+    max-width: 180px;
+    margin: 16px;
+}
+.registry-image:active {
+    outline: none;
+}
+.registry-link:hover, .registry-link:focus {
+    text-decoration: none;
+}
