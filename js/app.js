@@ -122,6 +122,17 @@ if (Meteor.isClient) {
             case 5: // This is the admin login section
                 $('#login').click();
                 break;
+            case 6: // This is the admin page
+                if ($('#editModal').hasClass('in')) {
+
+                    if ($('#saveEdit').is(":visible") ) {
+                        $('#saveEdit').click();
+                    }
+                } else if ($('#addGuestModal').hasClass('in')) {
+                    if ($('#saveAdd').is(":visible") ) {
+                        $('#saveAdd').click();
+                    }
+                }
             default:
                 break;
         }
@@ -170,6 +181,21 @@ if (Meteor.isServer) {
                     Name: name,
                     Comment: comment
                 });
+            },
+            updateGuestInfo: function (guestId, firstName, lastName, searchTerms) {
+                Guests.update({_id: guestId},
+                    { $set : { FirstName: firstName, LastName: lastName, SearchTerms: searchTerms }}
+                );
+            },
+            addNewGuest: function (firstName, lastName, searchTerms) {
+                Guests.insert({
+                        FirstName: firstName,
+                        LastName: lastName,
+                        SearchTerms: searchTerms
+                });
+            },
+            deleteGuest: function (guestId) {
+                Guests.remove({_id: guestId});
             }
         });
     });

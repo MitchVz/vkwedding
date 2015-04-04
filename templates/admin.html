@@ -37,9 +37,6 @@
 
     <div id="padding" style="margin-top:60px"></div>
 
-
-
-
     <span class="logoangletop-admin"></span>
     <div class="center-content">
         <div class="logo">
@@ -52,7 +49,7 @@
             <div class="content-padded-admin">
                 <h1 class="admin-table-header"><strong>Guest List</strong></h1>
                 <div class="pull-left">
-                    <button id="addButton" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i>  Add Guest</button>
+                    <button id="addGuestButton" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i>  Add Guest</button>
                 </div>
                 {{> reactiveTable collection=guest fields=fields settings=settings}}
             </div>
@@ -68,21 +65,21 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">{{selectedGuest}}</h3>
+                    <h3 class="modal-title">{{selectedGuest.FirstName}} {{selectedGuest.LastName}}</h3>
                 </div>
                 <div class="modal-body">
-                    {{#if rsvp}}
-                        {{#if attending}}
+                    {{#if selectedGuest.Rsvp}}
+                        {{#if selectedGuest.Attending}}
                             <h4 class="text-center text-success">Is attending!</h4>
                             <p><strong>Songs:</strong></p>
                             <ul>
-                                <li class="text-info">{{song1}}</li>
-                                <li class="text-info">{{song2}}</li>
-                                <li class="text-info">{{song3}}</li>
+                                <li class="text-info">{{selectedGuest.Song1}}</li>
+                                <li class="text-info">{{selectedGuest.Song2}}</li>
+                                <li class="text-info">{{selectedGuest.Song3}}</li>
                             </ul>
-                            {{#if comments}}
+                            {{#if selectedGuest.Comments}}
                                 <p><strong>Comments:</strong></p>
-                                <p style="padding-left: 2em" class="text-info">{{comments}}</p>
+                                <p style="padding-left: 2em" class="text-info">{{selectedGuest.Comments}}</p>
                             {{/if}}
                         {{else}}
                             <p class="text-danger">Is not attending...</p>
@@ -96,29 +93,91 @@
     </div><!-- /.modal -->
 
     <div id="editModal" class="modal fade">
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">{{selectedGuest}}</h3>
+                    <h3 class="modal-title">Edit information for: <span class="text-info">{{selectedGuest.FirstName}} {{selectedGuest.LastName}}</span></h3>
                 </div>
                 <div class="modal-body">
-                    <div>
-                        {{firstName}}
-                    </div>
-                    <div>
-                        {{lastName}}
-                    </div>
-                    <div>
-                        {{searchTerms}}
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>First Name</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="firstNameEdit" value="{{selectedGuest.FirstName}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>Last Name</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="lastNameEdit" value="{{selectedGuest.LastName}}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>Search Terms</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="searchTermsEdit" value="{{selectedGuest.SearchTerms}}">
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button id="SaveEdit" class="btn btn-primary">Save</button>
-                    <button id="SaveEdit" class="btn btn-primary">Save</button>
-                    <button id="CloseEdit" class="btn">close</button>
+                    <button id="deleteGuest" class="btn btn-danger pull-left">Remove Guest</button>
+                    <button id="saveEdit" class="btn btn-primary">Save</button>
+                    <button id="editSuccess" class="btn btn-success" disabled style="display: none"><i class="glyphicon glyphicon-check"></i> Saved!</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="addGuestModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Add a new guest!</h3>
+                </div>
+                <div class="modal-body">
+                    <div class="well">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>First Name</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="firstNameAdd">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>Last Name</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="lastNameAdd">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label"><strong>Search Terms</strong></label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" id="searchTermsAdd">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="saveAdd" class="btn btn-primary" disabled>Add</button>
+                    <button id="addSuccess" class="btn btn-success" disabled style="display: none"><i class="glyphicon glyphicon-check"></i> Guest Added!</button>
+                    <button id="addClose" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div id="deleteSuccessModal" class="modal fade">
+        <div class="modal-dialog modal-sm">
+            <div class="text-center alert alert-dismissible alert-danger">
+                <strong>Guest deleted!</strong>
+            </div>
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 

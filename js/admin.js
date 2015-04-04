@@ -1,5 +1,11 @@
 if (Meteor.isClient) {
 
+    SelectedGuest = new Meteor.Collection( null ); // Making a local meteor collection
+
+    Template.admin.rendered = function () {
+        Session.set('currentPage', 6); // for the enter click
+    };
+
     Template.admin.helpers({
         'guest': function () {
             Meteor.subscribe('allGuests');
@@ -25,35 +31,8 @@ if (Meteor.isClient) {
                 ]
             };
         },
-        'selectedGuest': function () {
-            return Session.get('Attendee');
-        },
-        'firstName': function () {
-            return Session.get('FirstName');
-        },
-        'lastName': function () {
-            return Session.get('LastName');
-        },
-        'searchTerms': function () {
-            return Session.get('SearchTerms');
-        },
-        'rsvp': function () {
-            return Session.get('Rsvp');
-        },
-        'attending': function () {
-            return Session.get('Attending');
-        },
-        'comments': function () {
-            return Session.get('Comments');
-        },
-        'song1': function () {
-            return Session.get('Song1');
-        },
-        'song2': function () {
-            return Session.get('Song2');
-        },
-        'song3': function () {
-            return Session.get('Song3');
+        'selectedGuest': function() {
+            return SelectedGuest.findOne();
         }
     });
 
@@ -68,43 +47,150 @@ if (Meteor.isClient) {
             saveAs(blob, "GuestsForCath.csv");
         },
         'click .reactive-table tr': function (event) {
+            SelectedGuest.remove({});
+            SelectedGuest.insert(this);
+
             var clickedElement = event.target.nodeName;
             if (clickedElement == "I" || clickedElement == "BUTTON") {
-                Session.set('Attendee', this.FirstName + ' ' + this.LastName);
-                Session.set('FirstName', this.FirstName);
-                Session.set('LastName', this.LastName);
-                Session.set('SearchTerms', this.SearchTerms);
-                editGuest(this);
+                $('#editModal').modal('show');
             }
             else {
-
-                Session.set('Attendee', this.FirstName + ' ' + this.LastName);
-                Session.set('Rsvp', this.Rsvp);
-                Session.set('Attending', this.Attending);
-                if (this.Attending) {
-                    Session.set('Song1', this.Song1);
-                    Session.set('Song2', this.Song2);
-                    Session.set('Song3', this.Song3);
-                    Session.set('Comments', this.Comments);
-                } else {
-                    Session.set('Song1', '');
-                    Session.set('Song2', '');
-                    Session.set('Song3', '');
-                    Session.set('Comments', false);
-                }
-
-                if (typeof this.FirstName != 'undefined') {
-                    $('#songModal').modal('show');
-                }
+                $('#songModal').modal('show');
             }
         },
         'click #logout': function () {
             Meteor.logout();
         },
-        'click #addButton': function () {
+        'click #addGuestButton': function () {
 
-            console.log("adding!");
+            // reset the modal
+            $('#addSuccess').hide();
+            $('#saveAdd').show();
+            $('#addClose').html("Cancel");
+            $('#firstNameAdd').prop("disabled", false);
+            $('#lastNameAdd').prop("disabled", false);
+            $('#searchTermsAdd').prop("disabled", false);
+            $('#firstNameAdd').val("");
+            $('#lastNameAdd').val("");
+            $('#searchTermsAdd').val("");
+            $('#addGuestModal').modal('show');
+        },
+        'click #saveEdit': function () {
+            var firstName = $('#firstNameEdit').val();
+            var lastName = $('#lastNameEdit').val();
+            var searchTerms = $('#searchTermsEdit').val();
+            var guest = SelectedGuest.findOne();
+
+            if (firstName.length == 0 || lastName.length == 0 || searchTerms.length == 0) {
+                console.log('You can\'t save empty strings');
+            } else {
+                Meteor.call('updateGuestInfo', guest._id, firstName, lastName, searchTerms, function(err,response) {
+                    if(err) {
+                        Session.set('serverDataResponse', "Error:" + err.reason);
+                        console.log(err);
+                        console.log(err.reason);
+                        return;
+                    } else {
+                        $('#editSuccess').show();
+                        $('#saveEdit').hide();
+                    }
+                    Session.set('serverDataResponse', response);
+                });
+            }
+        },
+        'click #saveAdd': function () {
+            var firstName = $('#firstNameAdd').val();
+            var lastName = $('#lastNameAdd').val();
+            var searchTerms = $('#searchTermsAdd').val();
+
+            if (firstName.length == 0 || lastName.length == 0 || searchTerms.length == 0) {
+                console.log('You can\'t save empty strings');
+            } else {
+                Meteor.call('addNewGuest', firstName, lastName, searchTerms, function(err,response) {
+                    if(err) {
+                        Session.set('serverDataResponse', "Error:" + err.reason);
+                        console.log(err);
+                        console.log(err.reason);
+                        return;
+                    } else {
+                        $('#addSuccess').show();
+                        $('#saveAdd').hide();
+                        $('#addClose').html("Close");
+                        $('#firstNameAdd').prop("disabled", true);
+                        $('#lastNameAdd').prop("disabled", true);
+                        $('#searchTermsAdd').prop("disabled", true);
+                    }
+                    Session.set('serverDataResponse', response);
+                });
+            }
+        },
+        'click #deleteGuest': function () {
+
+            var guest = SelectedGuest.findOne();
+            var reallyDelete = confirm("Are you sure you want to delete " + guest.FirstName + " " + guest.LastName + "?"
+                                        + "\nThis will delete any song requests and comments that the guest has made.");
+
+            if (reallyDelete) {
+                Meteor.call('deleteGuest', guest._id, function(err,response) {
+                    if(err) {
+                        Session.set('serverDataResponse', "Error:" + err.reason);
+                        console.log(err);
+                        console.log(err.reason);
+                        return;
+                    } else {
+                        $('#editModal').modal('hide');
+                        $('#deleteSuccessModal').modal('show');
+                        setTimeout(function(){
+                            $("#deleteSuccessModal").modal('hide');
+                        }, 2000);
+                    }
+                    Session.set('serverDataResponse', response);
+                });
+            }
+        },
+        'keyup #firstNameEdit': function (event) {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateEditForm();
+            }
+        },
+        'keyup #lastNameEdit': function () {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateEditForm();
+            }
+        },
+        'keyup #searchTermsEdit': function () {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateEditForm();
+            }
+        },
+        'keyup #firstNameAdd': function (event) {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateAddForm();
+            }
+        },
+        'keyup #lastNameAdd': function () {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateAddForm();
+            }
+        },
+        'keyup #searchTermsAdd': function () {
+
+            // Don't validate form for the enter key
+            if (event.keyCode != 13) {
+                validateAddForm();
+            }
         }
+
     });
 
     rsvpIcon = function (rsvp) {
@@ -148,8 +234,62 @@ if (Meteor.isClient) {
 
         return csvStringArray;
     };
-    editGuest = function() {
-        $('#editModal').modal('show');
+    validateEditForm = function () {
+
+        $('#saveEdit').show();
+        $('#editSuccess').hide()
+
+        if ($('#firstNameEdit').val().length < 1 ||
+            $('#lastNameEdit').val().length < 1 ||
+            $('#searchTermsEdit').val().length < 1) {
+
+            $('#saveEdit').prop("disabled", true);
+
+            if ($('#firstNameEdit').val().length < 1) {
+
+                $('#firstNameEdit').parent().parent().addClass("error");
+
+            } else {
+                $('#firstNameEdit').parent().parent().removeClass("error");
+            }
+            if ($('#lastNameEdit').val().length < 1) {
+
+                $('#lastNameEdit').parent().parent().addClass("error");
+
+            } else {
+                $('#lastNameEdit').parent().parent().removeClass("error");
+            }
+            if ($('#searchTermsEdit').val().length < 1) {
+
+                $('#searchTermsEdit').parent().parent().addClass("error");
+
+            } else {
+                $('#searchTermsEdit').parent().parent().removeClass("error");
+            }
+
+        } else {
+
+            $('#firstNameEdit').parent().parent().removeClass("error");
+            $('#lastNameEdit').parent().parent().removeClass("error");
+            $('#searchTermsEdit').parent().parent().removeClass("error");
+            $('#saveEdit').prop("disabled", false);
+        }
+    };
+    validateAddForm = function () {
+
+        $('#saveAdd').show();
+        $('#addSuccess').hide()
+
+        if ($('#firstNameAdd').val().length < 1 ||
+            $('#lastNameAdd').val().length < 1 ||
+            $('#searchTermsAdd').val().length < 1) {
+
+            $('#saveAdd').prop("disabled", true);
+
+        } else {
+
+            $('#saveAdd').prop("disabled", false);
+        }
     };
 }
 
