@@ -77,12 +77,12 @@
                                 <li class="text-info">{{selectedGuest.Song2}}</li>
                                 <li class="text-info">{{selectedGuest.Song3}}</li>
                             </ul>
-                            {{#if selectedGuest.Comments}}
-                                <p><strong>Comments:</strong></p>
-                                <p style="padding-left: 2em" class="text-info">{{selectedGuest.Comments}}</p>
-                            {{/if}}
                         {{else}}
                             <p class="text-danger">Is not attending...</p>
+                        {{/if}}
+                        {{#if selectedGuest.Comments}}
+                            <p><strong>Comments:</strong></p>
+                            <p style="padding-left: 2em" class="text-info">{{selectedGuest.Comments}}</p>
                         {{/if}}
                     {{else}}
                         <p>Has not RSVP'd yet...</p>
