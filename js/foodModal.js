@@ -33,7 +33,6 @@ if (Meteor.isClient) {
         emailMessage += "\r\rLove,\rThe Website";
 
         Meteor.call('sendEmail',
-            'vanderkram@gmail.com',
             'postmaster@mitchandcathwedding.com',
             emailSubject,
             emailMessage

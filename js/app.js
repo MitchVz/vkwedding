@@ -156,7 +156,7 @@ if (Meteor.isServer) {
                     { $set : { Comments: comment }}
                 );
             },
-            sendEmail: function (to, from, subject, text) {
+            sendEmail: function (from, subject, text) {
 
                 // March 30, 8:00pm commented these out to try to get the mailgun errors to go away
                 //check([to, from, subject, text], [String]);
@@ -166,7 +166,7 @@ if (Meteor.isServer) {
                 this.unblock();
 
                 Email.send({
-                    to: to,
+                    to: 'vanderkram@gmail.com',
                     from: from,
                     subject: subject,
                     text: text
