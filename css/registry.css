@@ -2,19 +2,19 @@
     min-height: 255px;
 }
 .registry-image.left {
-    max-width: 150px;
+    max-width: 130px;
     margin: 20px;
 }
 .registry-image.right {
-    max-width: 160px;
+    max-width: 140px;
     margin: 20px;
 }
 .registry-image.left:hover {
-    max-width: 165px;
+    max-width: 145px;
     margin: 16px;
 }
 .registry-image.right:hover {
-    max-width: 180px;
+    max-width: 160px;
     margin: 16px;
 }
 .registry-image:active {

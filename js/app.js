@@ -144,10 +144,6 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
     Meteor.startup(function () {
-        // Setup mailgun
-        process.env.MAIL_URL =
-            'smtp://postmaster@mail.mitchandcathwedding.com:3886854cf223bc7aa9c2562184d2880e@smtp.mailgun.org:587';
-
 
         Meteor.methods({
             rsvpForGuest: function (guestId, coming, song1, song2, song3) {
