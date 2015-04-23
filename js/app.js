@@ -80,10 +80,10 @@ if (Meteor.isClient) {
 
             // Centering the clock with linear regressions
             // Comment back in at < 100 days!!!
-            //var clockWidth = (.858 * width) - 54;
-            //$('.my-clock').parent().css({
-            //    "width": clockWidth
-            //});
+            var clockWidth = (.858 * width) - 54;
+            $('.my-clock').parent().css({
+                "width": clockWidth
+            });
 
         } else {
 
@@ -99,9 +99,9 @@ if (Meteor.isClient) {
             });
 
             // Comment back in at less than 100 days
-            //$('.my-clock').parent().css({
-            //    "width": "466px"
-            //});
+            $('.my-clock').parent().css({
+                "width": "466px"
+            });
         }
     };
 

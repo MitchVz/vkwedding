@@ -215,9 +215,9 @@ and (min-width: 621px) {
 /* Centering the clock */
 /* Comment back in once we are less than 100 days!!! */
 
-/*.clock-content > .block {*/
-    /*margin: 0 auto;*/
-    /*max-width: 472px;*/
-/*}*/
+.clock-content > .block {
+    margin: 0 auto;
+    max-width: 472px;
+}
 
 
