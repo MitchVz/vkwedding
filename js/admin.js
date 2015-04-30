@@ -33,7 +33,20 @@ if (Meteor.isClient) {
         },
         'selectedGuest': function() {
             return SelectedGuest.findOne();
+        },
+        'numberAttending': function () {
+            return Guests.find({Attending: true}).count();
+        },
+        'numberNotAttending': function () {
+            return Guests.find({Attending: false}).count();
+        },
+        'numberNotResponded': function () {
+            return Guests.find().count() - Guests.find({Rsvp: true}).count();
+        },
+        'numberTotal': function () {
+            return Guests.find().count();
         }
+
     });
 
     Template.admin.events({

@@ -49,6 +49,14 @@
             <div class="content-padded-admin">
                 <h1 class="admin-table-header"><strong>Guest List</strong></h1>
                 <div class="pull-left">
+                    <p class="text-info"><strong><i>{{numberTotal}} total guests. {{numberAttending}} attending. {{numberNotAttending}} not attending.</i></strong></p>
+                </div>
+                <br/><br/>
+                <div class="pull-left">
+                    <p class=""><strong><i>{{numberNotResponded}} jerks haven't responded.</i></strong></p>
+                </div>
+                <br/><br/>
+                <div class="pull-left">
                     <button id="addGuestButton" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i>  Add Guest</button>
                 </div>
                 {{> reactiveTable collection=guest fields=fields settings=settings}}
