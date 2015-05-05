@@ -198,6 +198,7 @@ if (Meteor.isServer) {
 
     // takes an array of strings as search queries and returns the specified guests
     Meteor.publish('guestList', function (queries) {
+
         if (queries.toString().length < 3)
             return [];
         var queryArray = [];
@@ -206,7 +207,10 @@ if (Meteor.isServer) {
         });
         var query = {$and: queryArray };
 
-        return Guests.find(query);
+        var guests = Guests.find(query);
+
+        Meteor._sleepForMs(2500); // Adding so that we can show the cool heart spinner for a bit
+        return guests;
     });
 
     // Returns everything in the Guests collection

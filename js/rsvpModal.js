@@ -3,26 +3,25 @@ if (Meteor.isClient) {
     SelectedGuests = new Meteor.Collection( null ); // Making a local meteor collection
 
     Template.rsvpModal.helpers({
-        'guest': function() {
+        'guestSearch': function() {
             var searchQueries = Session.get('queries');
 
             if (searchQueries == null) {
-                return null;
+                return {
+                    guests: null,
+                    ready: true,
+                    count: 0
+                }
             } else {
                 // Meteor subscribe does the searching for us and adds the records to our guestlist on the client
                 // Then we call Guests.find({}) to get the records that we just subscribed to.
-                Meteor.subscribe('guestList', searchQueries);
-                return Guests.find({}, {sort: {LastName: 1} });
+                var ready = Meteor.subscribe('guestList', searchQueries).ready();
+                return {
+                    guests: Guests.find({}, {sort: {LastName: 1} }),
+                    ready: ready,
+                    count: Guests.find().count()
+                };
             }
-        },
-        'atLeastOneGuest': function() {
-            var searchQueries = Session.get('queries');
-
-            if (searchQueries == null || searchQueries.toString().length < 3) {
-                return false;
-            }
-            Meteor.subscribe('guestList', searchQueries);
-            return Guests.find({}).count() > 0;
         },
         'selectedGuest': function() {
             return SelectedGuests.find();
@@ -67,17 +66,10 @@ if (Meteor.isClient) {
 
     Template.rsvpModal.events({
         'click #search': function () {
+            Session.set('loadingGuests', true);
             var query = $('#searchField').val().toLowerCase();
             var queries = query.split(' ');
             Session.set('queries', queries);
-
-            Meteor.call('rsvpForGuest', 'someIdString', 'true', function(err,response) {
-                if(err) {
-                    Session.set('serverDataResponse', "Error:" + err.reason);
-                    return;
-                }
-                Session.set('serverDataResponse', response);
-            });
 
             goToPage(2);
         },

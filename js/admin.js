@@ -6,10 +6,21 @@ if (Meteor.isClient) {
         Session.set('currentPage', 6); // for the enter click
     };
 
+    Template.admin.onCreated(function () {
+        var instance = this;
+        instance.autorun(function () {
+            // subscribe to all guests
+            instance.subscribe('allGuests');
+        });
+
+        instance.guests = function() {
+            return Guests.find({});
+        }
+    });
+
     Template.admin.helpers({
         'guest': function () {
-            Meteor.subscribe('allGuests');
-            return Guests;
+            return Template.instance().guests();
         },
         settings: function () {
             return {

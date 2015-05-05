@@ -45,22 +45,37 @@
         <span class="angletop-admin"></span>
 
         <div class="content-admin">
+            {{#if Template.subscriptionsReady}}
+                <div class="content-padded-admin">
+                    <h1 class="admin-table-header"><strong>Guest List</strong></h1>
+                    <div class="pull-left">
+                        <p class="text-info"><strong><i>{{numberTotal}} total guests. {{numberAttending}} attending. {{numberNotAttending}} not attending.</i></strong></p>
+                    </div>
+                    <br/><br/>
+                    <div class="pull-left">
+                        <p class=""><strong><i>{{numberNotResponded}} jerks haven't responded.</i></strong></p>
+                    </div>
+                    <br/><br/>
+                    <div class="pull-left">
+                        <button id="addGuestButton" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i>  Add Guest</button>
+                    </div>
 
-            <div class="content-padded-admin">
-                <h1 class="admin-table-header"><strong>Guest List</strong></h1>
-                <div class="pull-left">
-                    <p class="text-info"><strong><i>{{numberTotal}} total guests. {{numberAttending}} attending. {{numberNotAttending}} not attending.</i></strong></p>
+                        {{> reactiveTable collection=guest fields=fields settings=settings}}
                 </div>
-                <br/><br/>
-                <div class="pull-left">
-                    <p class=""><strong><i>{{numberNotResponded}} jerks haven't responded.</i></strong></p>
+            {{else}}
+                <div style="margin-top:250px; height:100px; width:100px;">
+                    <spinnercontainer>
+                        <spinner>
+                            <heart>
+                                <span class='heartL'></span>
+                                <span class='heartR'></span>
+                                <span class='square'></span>
+                            </heart>
+                            <shadow></shadow>
+                        </spinner>
+                    </spinnercontainer>
                 </div>
-                <br/><br/>
-                <div class="pull-left">
-                    <button id="addGuestButton" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-plus"></i>  Add Guest</button>
-                </div>
-                {{> reactiveTable collection=guest fields=fields settings=settings}}
-            </div>
+            {{/if}}
         </div>
 
         <span class="anglebottom-admin"></span>
