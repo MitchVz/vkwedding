@@ -5,8 +5,6 @@ OnBeforeActions = {
         if (!Meteor.userId()) {
             Session.set('currentPage', 5);
 
-
-
             this.render('login');
             //return pause();
         } else {
