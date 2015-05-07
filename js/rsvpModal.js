@@ -86,6 +86,7 @@ if (Meteor.isClient) {
         'click tbody > tr': function ( event ) {
 
             // the parent of the checkbox is different from the other parents...
+            // Same with the parent of a glyphicon
             if ($(event.target).is(':checkbox')) {
 
                 if ($(event.target).prop('checked')) {
@@ -96,6 +97,19 @@ if (Meteor.isClient) {
                     SelectedGuests.remove(this);
                 }
 
+            } else if ($(event.target).prop("tagName").toLowerCase() === 'span') {
+
+                var input = $(event.target).parent().parent().children(":first-child").children(":first-child");
+
+                if (input.prop('checked')) {
+                    input.prop('checked', false);
+                    $(event.target).parent().parent().removeClass("highlight-row");
+                    SelectedGuests.remove(this);
+                } else {
+                    input.prop('checked', true);
+                    $(event.target).parent().parent().addClass("highlight-row");
+                    SelectedGuests.insert(this);
+                }
             } else {
 
                 var input = $(event.target).parent().children(":first-child").children(":first-child");
