@@ -51,6 +51,16 @@ span.anglebottom-admin {
 .reactive-table {
     background: rgba(255,255,255,0.8);
 }
+.glyphicon-play {
+    cursor: pointer;
+}
+.glyphicon.backwards {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
 
 
 /*Don't know why this error stuff wasn't here initially*/

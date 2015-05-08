@@ -4,6 +4,9 @@ if (Meteor.isClient) {
 
     Template.admin.rendered = function () {
         Session.set('currentPage', 6); // for the enter click
+        Session.set('showGuestList', true);
+        Session.set('showSongList', false);
+        Session.set('showMenuComments', false);
     };
 
     Template.admin.onCreated(function () {
@@ -13,16 +16,40 @@ if (Meteor.isClient) {
             instance.subscribe('allGuests');
         });
 
-        instance.guests = function() {
+        instance.guests = function () {
             return Guests.find({});
-        }
+        };
+
+        instance.songs = function () {
+            var songs = [];
+
+            var song1s = Guests.find({ Song1 : { $exists: true, $nin: [ "" ] } }, { _id:0 } ).fetch();
+            song1s.forEach(function (guest) {
+                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song1});
+            });
+
+            var song2s = Guests.find({ Song2 : { $exists: true, $nin: [ "" ] } }, { _id:0 }).fetch();
+            song2s.forEach(function (guest) {
+                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song2});
+            });
+
+            var song3s = Guests.find({ Song3 : { $exists: true, $nin: [ "" ] } }, { _id:0 }).fetch();
+            song3s.forEach(function (guest) {
+                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song3});
+            });
+
+            return songs;
+        };
     });
 
     Template.admin.helpers({
         'guest': function () {
             return Template.instance().guests();
         },
-        settings: function () {
+        'songs': function () {
+            return Template.instance().songs();
+        },
+        guestListSettings: function () {
             return {
                 rowsPerPage: 300,
                 showFilter: true,
@@ -42,6 +69,17 @@ if (Meteor.isClient) {
                 ]
             };
         },
+        songListSettings: function () {
+            return {
+                rowsPerPage: 300,
+                showFilter: true,
+                fields: [
+                    { key: 'FirstName', label: 'First Name' },
+                    { key: 'LastName', label: 'Last Name', sort: -1},
+                    { key: 'Song', label: 'Song' }
+                ]
+            };
+        },
         'selectedGuest': function() {
             return SelectedGuest.findOne();
         },
@@ -56,6 +94,15 @@ if (Meteor.isClient) {
         },
         'numberTotal': function () {
             return Guests.find().count();
+        },
+        'showGuestList': function () {
+            return Session.get('showGuestList');
+        },
+        'showSongList': function () {
+            return Session.get('showSongList');
+        },
+        'showMenuComments': function () {
+            return Session.get('showMenuComments');
         }
 
     });
@@ -81,6 +128,24 @@ if (Meteor.isClient) {
             else {
                 $('#songModal').modal('show');
             }
+        },
+        'click #goto-songs-button': function () {
+            Session.set('showGuestList', false);
+            Session.set('showSongList', true);
+            Session.set('showMenuComments', false);
+
+        },
+        'click #goto-guests-button': function () {
+            Session.set('showGuestList', true);
+            Session.set('showSongList', false);
+            Session.set('showMenuComments', false);
+
+        },
+        'click #goto-menu-comments-button': function () {
+            Session.set('showGuestList', false);
+            Session.set('showSongList', false);
+            Session.set('showMenuComments', true);
+
         },
         'click #logout': function () {
             Meteor.logout();
