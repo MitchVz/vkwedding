@@ -86,7 +86,7 @@
                         {{#if showSongList}}
                             {{> reactiveTable collection=songs fields=fields settings=songListSettings}}
                         {{else}}
-
+                            {{> reactiveTable collection=comments fields=fields settings=menuCommentsSettings}}
                         {{/if}}
                     {{/if}}
                 </div>

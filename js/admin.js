@@ -14,6 +14,7 @@ if (Meteor.isClient) {
         instance.autorun(function () {
             // subscribe to all guests
             instance.subscribe('allGuests');
+            instance.subscribe('menuComments');
         });
 
         instance.guests = function () {
@@ -40,6 +41,10 @@ if (Meteor.isClient) {
 
             return songs;
         };
+
+        instance.comments = function () {
+            return Comments.find({});
+        };
     });
 
     Template.admin.helpers({
@@ -48,6 +53,9 @@ if (Meteor.isClient) {
         },
         'songs': function () {
             return Template.instance().songs();
+        },
+        'comments': function () {
+            return Template.instance().comments();
         },
         guestListSettings: function () {
             return {
@@ -71,12 +79,22 @@ if (Meteor.isClient) {
         },
         songListSettings: function () {
             return {
-                rowsPerPage: 300,
+                rowsPerPage: 50,
                 showFilter: true,
                 fields: [
                     { key: 'FirstName', label: 'First Name' },
-                    { key: 'LastName', label: 'Last Name', sort: -1},
+                    { key: 'LastName', label: 'Last Name', sort: 1},
                     { key: 'Song', label: 'Song' }
+                ]
+            };
+        },
+        menuCommentsSettings: function () {
+            return {
+                rowsPerPage: 10,
+                showFilter: true,
+                fields: [
+                    { key: 'Name', label: 'Name', sort: 1 },
+                    { key: 'Comment', label: 'Comment' }
                 ]
             };
         },

@@ -218,4 +218,9 @@ if (Meteor.isServer) {
         if (this.userId) return Guests.find({}, {sort: {LastName: -1} });
     });
 
+    // Returns everything in the Menu comments collection
+    Meteor.publish('menuComments', function () {
+        if (this.userId) return Comments.find({}, {sort: {LastName: -1} });
+    });
+
 }
