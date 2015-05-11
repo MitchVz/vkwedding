@@ -22,3 +22,4 @@ service-configuration
 dburles:google-maps
 meteorhacks:sikka
 meteorhacks:kadira
+momentjs:moment

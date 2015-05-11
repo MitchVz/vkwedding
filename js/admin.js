@@ -26,17 +26,24 @@ if (Meteor.isClient) {
 
             var song1s = Guests.find({ Song1 : { $exists: true, $nin: [ "" ] } }, { _id:0 } ).fetch();
             song1s.forEach(function (guest) {
-                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song1});
+
+                if ($.grep(songs, function(e){ return e.Song == guest.Song1; }).length == 0) {
+                    songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song1, Date: guest.RsvpDate});
+                }
             });
 
             var song2s = Guests.find({ Song2 : { $exists: true, $nin: [ "" ] } }, { _id:0 }).fetch();
             song2s.forEach(function (guest) {
-                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song2});
+                if ($.grep(songs, function(e){ return e.Song == guest.Song2; }).length == 0) {
+                    songs.push({FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song2, Date: guest.RsvpDate});
+                }
             });
 
             var song3s = Guests.find({ Song3 : { $exists: true, $nin: [ "" ] } }, { _id:0 }).fetch();
             song3s.forEach(function (guest) {
-                songs.push({ FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song3});
+                if ($.grep(songs, function(e){ return e.Song == guest.Song3; }).length == 0) {
+                    songs.push({FirstName: guest.FirstName, LastName: guest.LastName, Song: guest.Song3, Date: guest.RsvpDate});
+                }
             });
 
             return songs;
@@ -73,7 +80,8 @@ if (Meteor.isClient) {
                     //{ key: 'Song2', label: 'Song 2', hidden: true},
                     //{ key: 'Song3', label: 'Song 3', hidden: true},
                     { key: 'SearchTerms', hidden: true},
-                    { key: 'RsvpDate', label: "Date of RSVP", hidden: true, sort: -1 }
+                    { key: 'RsvpDate', label: "Time of RSVP", fn: function (date) { return moment(date).fromNow(); }},
+                    { key: 'RsvpDate', label: "hiddenSortingDate", hidden: true, sort: -1 }
 
                 ]
             };
@@ -84,8 +92,10 @@ if (Meteor.isClient) {
                 showFilter: true,
                 fields: [
                     { key: 'FirstName', label: 'First Name' },
-                    { key: 'LastName', label: 'Last Name', sort: 1},
-                    { key: 'Song', label: 'Song' }
+                    { key: 'LastName', label: 'Last Name'},
+                    { key: 'Song', label: 'Song' },
+                    { key: 'Date', label: 'Requested', fn: function (date) { return moment(date).fromNow(); }},
+                    { key: 'Date', label: 'hiddenSortingDate', hidden: true, sort: -1}
                 ]
             };
         },
@@ -137,15 +147,19 @@ if (Meteor.isClient) {
             saveAs(blob, "GuestsForCath.csv");
         },
         'click .reactive-table tr': function (event) {
-            SelectedGuest.remove({});
-            SelectedGuest.insert(this);
 
-            var clickedElement = event.target.nodeName;
-            if (clickedElement == "I" || clickedElement == "BUTTON") {
-                $('#editModal').modal('show');
-            }
-            else {
-                $('#songModal').modal('show');
+            if (Session.get('showGuestList'))
+            {
+                SelectedGuest.remove({});
+                SelectedGuest.insert(this);
+
+                var clickedElement = event.target.nodeName;
+                if (clickedElement == "I" || clickedElement == "BUTTON") {
+                    $('#editModal').modal('show');
+                }
+                else {
+                    $('#songModal').modal('show');
+                }
             }
         },
         'click #goto-songs-button': function () {
