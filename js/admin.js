@@ -65,14 +65,15 @@ if (Meteor.isClient) {
                     { key: 'Edit', label: '', fn: function () { return editIcon()}},
                     { key: 'FirstName', label: 'First Name' },
                     { key: 'LastName', label: 'Last Name' },
-                    { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }, sort: -1},
+                    { key: 'Rsvp', label: 'RSVP\'d', fn: function (value) { return rsvpIcon(value); }},
                     { key: 'Attending', label: 'Attending', fn: function (value, object) { return attendingIcon(object); }},
 
                     // Uncomment this to allow for searching by song suggestions
                     //{ key: 'Song1', label: 'Song 1', hidden: true},
                     //{ key: 'Song2', label: 'Song 2', hidden: true},
                     //{ key: 'Song3', label: 'Song 3', hidden: true},
-                    { key: 'SearchTerms', hidden: true}
+                    { key: 'SearchTerms', hidden: true},
+                    { key: 'RsvpDate', label: "Date of RSVP", hidden: true, sort: -1 }
 
                 ]
             };

@@ -148,7 +148,7 @@ if (Meteor.isServer) {
         Meteor.methods({
             rsvpForGuest: function (guestId, coming, song1, song2, song3) {
                 Guests.update({_id: guestId},
-                    { $set : { Rsvp: true, Attending: coming, Song1: song1, Song2: song2, Song3: song3 }}
+                    { $set : { Rsvp: true, Attending: coming, Song1: song1, Song2: song2, Song3: song3, RsvpDate: new Date() }}
                 );
             },
             addComment: function (guestId, comment) {
@@ -187,7 +187,14 @@ if (Meteor.isServer) {
                 Guests.insert({
                         FirstName: firstName,
                         LastName: lastName,
-                        SearchTerms: searchTerms
+                        SearchTerms: searchTerms,
+                        Rsvp: "",
+                        Attending: "",
+                        Song1: "",
+                        Song2: "",
+                        Song3: "",
+                        Comment: "",
+                        RsvpDate: new Date(2014, 0, 1) // Months are zero-indexed
                 });
             },
             deleteGuest: function (guestId) {
