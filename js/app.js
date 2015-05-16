@@ -117,7 +117,10 @@ if (Meteor.isClient) {
                 $('#submit').click();
                 break;
             case 4:
-                $('#addComment').click();
+                $('#commentField').val(function(i, text) {
+                    return text + " " + String.fromCharCode(13);
+                });
+                //$('#addComment').click();
                 break;
             case 5: // This is the admin login section
                 $('#login').click();
