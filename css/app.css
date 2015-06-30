@@ -37,6 +37,15 @@
     text-align: center;
 }
 
+.caterer-text {
+    padding-right: 25px;
+    padding-top: 15px;
+    text-align: center;
+}
+.caterer-image {
+    padding-left: 25px;
+}
+
 a {
     color: #428bca;
 }

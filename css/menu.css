@@ -1,0 +1,26 @@
+.menu-image {
+    max-height: 200px;
+}
+.menu-image:hover {
+    max-height: 220px;
+}
+.padding {
+    padding-left: 23px;
+    padding-right: 23px;
+}
+ul.apple_bullet {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+ul.apple_bullet > li {
+    background: url("/images/apple_icon.png") no-repeat left top;
+    height: 54px;
+    padding-left: 44px;
+    padding-top: 3px;
+}
+
+
+@media (min-width: 768px) {
+    /*center all of the text*/
+}
