@@ -25,4 +25,11 @@ Router.onBeforeAction(OnBeforeActions.loginRequired, {
 Router.map(function(){
     this.route('home', {path: '/'} );
     this.route('admin', {path: '/admin'});
+    this.route('/kramer', {where: 'server'}).get(function() {
+        this.response.writeHead(302, {
+            'Location': "http://calvinwritersonline.org/kramer-mr-kramer/"
+        });
+        this.response.end();
+    });
 });
+
