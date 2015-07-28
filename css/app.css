@@ -183,50 +183,50 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 @media all
 and (min-width: 621px) {
     div .clock {
-        margin-right: auto;
-        margin-left: auto;
-        width: 99%;
+        margin-right: auto !important;
+        margin-left: auto !important;
+        width: 99% !important;
     }
 }
 
 .flip-clock-wrapper .flip {
-    /*box-shadow: none;*/
+    /*box-shadow: none !important;*/
 }
 .flip-clock-dot {
-    box-shadow: none;
-    background: #4E5D6C;
+    box-shadow: none !important;
+    background: #4E5D6C !important;
 }
 .flip-clock-wrapper ul li a div div.inn {
-    color: #F7F9FA;
-    background-color: #4E5D6C;
+    color: #F7F9FA !important;
+    background-color: #4E5D6C !important;
 
 }
 #clock-div {
     /* fix clock re-rendering issue */
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0) !important;
 }
 .flip-clock-divider.days .flip-clock-label {
-    font-size: 25px;
-    right: -96px;
-    left: 13px;
+    font-size: 25px !important;
+    right: -96px !important;
+    left: 13px !important;
 }
 .flip-clock-divider.hours .flip-clock-label {
-    font-size: 25px;
-    right: -108px;
-    left: 25px;
+    font-size: 25px !important;
+    right: -108px !important;
+    left: 25px !important;
 }
 .flip-clock-divider.minutes .flip-clock-label {
-    font-size: 25px;
-    right: -139px;
-    left: 24px;
+    font-size: 25px !important;
+    right: -139px !important;
+    left: 24px !important;
 }
 
 /* Centering the clock */
 /* Comment back in once we are less than 100 days!!! */
 
 .clock-content > .block {
-    margin: 0 auto;
-    max-width: 472px;
+    margin: 0 auto !important;
+    max-width: 472px !important;
 }
 
 

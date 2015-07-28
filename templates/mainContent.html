@@ -44,10 +44,11 @@
         var now = new Date();
         var diff = (date.getTime()/1000) - (now.getTime()/1000);
 
-        var clock = $('.clock').FlipClock(diff,{
+        var clock = $('.clock.my-clock').FlipClock(diff,{
             clockFace: 'DailyCounter',
             countdown: true,
-            showSeconds: false
+            showSeconds: false,
+            removeLeadingZeros: true
         });
     </script>
 </template>

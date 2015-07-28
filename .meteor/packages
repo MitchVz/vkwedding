@@ -7,7 +7,6 @@ meteor-platform
 less
 nemo64:bootstrap
 
-mrt:meteor-flipclockjs
 reactive-var
 jquery
 spectrum:photoswipe
@@ -21,5 +20,4 @@ ian:accounts-ui-bootstrap-3
 service-configuration
 dburles:google-maps
 meteorhacks:sikka
-meteorhacks:kadira
 momentjs:moment
